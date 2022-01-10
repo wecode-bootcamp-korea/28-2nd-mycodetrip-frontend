@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
 
 import Main from './pages/Main/Main';
 import Auth from './pages/Auth/Auth';
@@ -11,26 +10,20 @@ import Reservation from './pages/Reservation/Reservation';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 
-import { GlobalStyle } from './styles/GlobalStyle';
-import { theme } from './styles/theme';
-
 function Router() {
   return (
     <>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/flightsList" element={<FlightsList />} />
-            <Route path="/flightsCheck" element={<FlightsCheck />} />
-            <Route path="/reservation" element={<Reservation />} />
-          </Routes>
-        </BrowserRouter>
-        <Footer />
-      </ThemeProvider>
+      <Navbar />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/flightsList" element={<FlightsList />} />
+          <Route path="/flightsCheck" element={<FlightsCheck />} />
+          <Route path="/reservation" element={<Reservation />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
     </>
   );
 }
