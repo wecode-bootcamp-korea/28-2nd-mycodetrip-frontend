@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# MyCodeTrip Team Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## :: 팀원
 
-## Available Scripts
+- Frontend - 강희원, 김선주, 박준영, 성윤경
+- Backend - 이민석, 이찬주
+- Backend Link: https://github.com/wecode-bootcamp-korea/28-2nd-mycodetrip-backend.git
 
-In the project directory, you can run:
+## :: Project 소개
 
-### `npm start`
+### Languages and Tools
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**_Front-end_**
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**_Back-end_**
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
-### `npm test`
+## 구현사항
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Authorization
+2. Main
+3. FlightsList
+4. 항공권 확인 및 금액 확인 페이지
+5. 예약 페이지
 
-### `npm run build`
+## styled components 사용법
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+import styled from 'styled-components';
+const MainWrapper = styled.div`
+  ${props => props.theme.flex};
+  background-color: red;
+  color: ${props => props.theme.color.green};
+`;
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 일반적인 태그 대신에 styled.Tag명`으로`내부에 sass 로직으로 스타일 작성
+- sass 문법 이기에 Nesting이 가능하다.
+- Components이기에 props를 받을 수 있으며 ${props => props.color} 또는 ${({color} => color)}와 같이 props를 스타일에 적용시킬 수 있다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Theme 객체
 
-### `npm run eject`
+- props에는 ThemeProvider로 부터 전달받은 theme객체가 들어있고 내부의 값들은 아래와 같다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- ${props => props.theme.색상명 또는 flex}로 적용시킬 수 있다.
+- theme.flex의 경우 <Wrapper justify='center' />와 같이 props로 넘겨 주면 justify props가 theme.flex의 props로 들어가 적용이 된다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+export const theme = {
+  flex: css`
+    display: flex;
+    justify-content: ${({ justify }) =>
+      justify ? `${justify}` : 'flex-start'};
+    align-items: ${({ align }) => (align ? `${align}` : 'center')};
+  `,
+  color: {
+    white: '#ffffff',
+    black: '#222222',
+    primary_300: '#e6f4fd',
+    primary_400: '#2b96ec',
+    primary_500: '#2a94e9',
+    green: '#147b5e',
+    gray_50: '#f0f3f5',
+    gray_100: '#f0f3f5',
+    gray_300: '#dfe3e6',
+    gray_500: '#acb5bd',
+    gray_800: '#656d75',
+  },
+};
+```
