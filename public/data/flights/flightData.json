@@ -1,0 +1,119 @@
+{
+  "result": {
+    "type": "flight_list",
+    "total": 6,
+    "maxprice": 96000,
+    "data": [
+      {
+        "id": 1,
+        "logo": "https://fakeimg.pl/100x100/",
+        "airline": "쁘띠민석",
+        "aircraft": "RS927",
+        "departure": {
+          "time": "2022-02-11T20:32Z",
+          "city": "광주",
+          "code": "GMP"
+        },
+        "arrival": {
+          "time": "2022-02-11T22:50Z",
+          "city": "제주",
+          "code": "CJU"
+        },
+        "tickets": 9,
+        "price": 36500,
+        "seat_type": "이코노미석"
+      },
+      {
+        "id": 2,
+        "logo": "https://fakeimg.pl/100x100/",
+        "airline": "희원항공",
+        "aircraft": "LJ331",
+        "departure": {
+          "time": "2022-03-22T01:08Z",
+          "city": "광주",
+          "code": "GMP"
+        },
+        "arrival": {
+          "time": "2022-03-22T03:20Z",
+          "city": "제주",
+          "code": "CJU"
+        },
+        "tickets": 1,
+        "price": 70900,
+        "baggage": 0
+      },
+      {
+        "id": 3,
+        "logo": "https://fakeimg.pl/100x100/",
+        "airline": "준영에어",
+        "aircraft": "JY103",
+        "departure": {
+          "time": "2022-02-11T10:32Z",
+          "city": "광주",
+          "code": "GMP"
+        },
+        "arrival": {
+          "time": "2022-02-11T22:10Z",
+          "city": "제주",
+          "code": "CJU"
+        },
+        "tickets": 1,
+        "price": 45000
+      },
+      {
+        "id": 4,
+        "logo": "https://fakeimg.pl/100x100/",
+        "airline": "윤경항공",
+        "aircraft": "YKS034",
+        "departure": {
+          "time": "2022-03-30T16:40Z",
+          "city": "광주",
+          "code": "GMP"
+        },
+        "arrival": {
+          "time": "2022-03-30T23:09Z",
+          "city": "제주",
+          "code": "CJU"
+        },
+        "tickets": 1,
+        "price": 56000
+      },
+      {
+        "id": 5,
+        "logo": "https://fakeimg.pl/100x100/",
+        "airline": "프로찬주",
+        "aircraft": "CHLPRO",
+        "departure": {
+          "time": "2022-03-20T12:32Z",
+          "city": "광주",
+          "code": "GMP"
+        },
+        "arrival": {
+          "time": "2022-03-20T14:50Z",
+          "city": "제주",
+          "code": "CJU"
+        },
+        "tickets": 1,
+        "price": 54000
+      },
+      {
+        "id": 6,
+        "logo": "https://fakeimg.pl/100x100/",
+        "airline": "선주항공",
+        "aircraft": "LSJ678",
+        "departure": {
+          "time": "2022-05-10T07:32Z",
+          "city": "광주",
+          "code": "GMP"
+        },
+        "arrival": {
+          "time": "2022-05-10T09:50Z",
+          "city": "제주",
+          "code": "CJU"
+        },
+        "tickets": 1,
+        "price": 89000
+      }
+    ]
+  }
+}
