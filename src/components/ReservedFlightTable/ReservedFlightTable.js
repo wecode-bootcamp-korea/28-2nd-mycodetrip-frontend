@@ -3,7 +3,7 @@ import FlightBadge from '../FlightInfoCard/FlightBadge';
 import FlightTimeInfo from '../FlightInfoCard/FlightTimeInfo';
 import { getKORFormattedDate } from '../../utils/getTime';
 
-const ReservedFlightTable = ({ reservedFlightInfo }) => {
+const ReservedFlightTable = ({ reservedFlightInfo, adult }) => {
   return (
     <Container>
       {reservedFlightInfo?.map((flightInfo, idx) => (
@@ -19,7 +19,7 @@ const ReservedFlightTable = ({ reservedFlightInfo }) => {
             </FlexCol>
             <FlightTimeInfo flightInfo={flightInfo} />
             <FlexCol>
-              <p>성인 {flightInfo?.personnel}명</p>
+              <p>성인 {adult}명</p>
               <p>{flightInfo.seat_type}</p>
             </FlexCol>
             <Typograpy>무료 수하물 {flightInfo?.baggage ?? 15}KG</Typograpy>

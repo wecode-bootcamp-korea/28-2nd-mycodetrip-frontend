@@ -1,34 +1,10 @@
-import React, { useState, useEffect } from 'react';
-// import useQueryString from '../../../hooks/useQueryString';
-import useFetch from '../../hooks/useFetch';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReservedFlightTable from '../../components/ReservedFlightTable/ReservedFlightTable.js';
 import Button from './components/Button';
 
-export default function ReservedTicketInfo({
-  data,
-  totalPrice,
-  setTotalPrice,
-  adult,
-}) {
+export default function ReservedTicketInfo({ ticketInfo, totalPrice, adult }) {
   const [hiddenDisplayPrice, setHiddenDisplayPrice] = useState(true);
-
-  // const {
-  //   searchParams,
-  //   toggleQueryString,
-  //   reflectUserSelectQueries,
-  //   navigateToWithQueryString,
-  // } = useQueryString();
-
-  //돈구하기
-  // useEffect(() => {
-  //   const getTotalPrice = () => {
-  //     const TicketPrice = data.map(i => i.price);
-  //     const sumPrice = TicketPrice.reduce((sum, currVal) => sum + currVal);
-  //     return sumPrice;
-  //   };
-  //   if (data.length > 0) return setTotalPrice(getTotalPrice());
-  // }, [data]);
 
   const handleDisplayPrice = e => {
     if (hiddenDisplayPrice === false) {
@@ -41,12 +17,9 @@ export default function ReservedTicketInfo({
   return (
     <ReservedTicketInfoWrapper>
       <P>선택한 항공권</P>
-      {/* {console.log(data?.flights)} */}
-      {data?.flghts.map((x, index) => (
-        <ReservedFlightTable key={index} reservedFlightInfo={x} />
-      ))}
+      <ReservedFlightTable reservedFlightInfo={ticketInfo} adult={adult} />
       <div hidden={hiddenDisplayPrice}>
-        <P fontsize="16px">성인$명</P>
+        <P fontsize="16px">성인{adult}명</P>
         <FatHr />
         <Row>
           <span>항공요금</span>
