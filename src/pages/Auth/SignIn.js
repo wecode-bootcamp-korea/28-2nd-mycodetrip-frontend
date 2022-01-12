@@ -23,7 +23,7 @@ const SignInWrapper = styled.section`
 `;
 
 const SignInContainer = styled.div`
-  border: 1px solid black;
+  border: 1px solid gray;
   height: 410px;
   width: 450px;
   padding: 100px;
