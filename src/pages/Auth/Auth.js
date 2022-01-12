@@ -52,7 +52,6 @@ function Auth() {
           <Socialtext>네이버</Socialtext>
           <Socialtext>이메일</Socialtext>
         </Social>
-
         <YetSignIn>
           {isLogin ? '이미 아이디가 있으신가요?' : '아직 회원이 아니신가요?'}
         </YetSignIn>
@@ -63,25 +62,20 @@ function Auth() {
     </Container>
   );
 }
-
 export default Auth;
-
 const Container = styled.section`
   padding: 0px;
   margin: 100px 0px 100px 448px;
 `;
-
 const AuthContainer = styled.div`
   border: 1px solid #b9bbb6;
   height: 450px;
   width: 420px;
   padding: 50px;
 `;
-
 const TextBox = styled.div`
   line-height: 1.5;
 `;
-
 const Title = styled.h1`
   padding-top: 40px;
   padding-bottom: 5px;
@@ -89,7 +83,6 @@ const Title = styled.h1`
   font-weight: 500;
   text-align: center;
 `;
-
 const SubTitle = styled.p`
   line-height: 1;
   text-align: center;
@@ -98,7 +91,6 @@ const SubTitle = styled.p`
   display: block;
   padding-bottom: 20px;
 `;
-
 const KakaoButton = styled.div`
   display: flex;
   justify-content: center;
@@ -119,24 +111,20 @@ const Social = styled.div`
   font-weight: 500;
   color: #b9bbb6;
 `;
-
 const Socialtext = styled.div`
   margin: 5px 23px;
   color: #b9bbb6;
 `;
-
 const YetSignIn = styled.p`
   line-height: 2.5;
   display: inline;
   color: #b9bbb6;
   padding-left: 42px;
 `;
-
 const BtnText = styled.span`
   margin-top: 4px;
   font-weight: 500;
 `;
-
 const AuthQuest = styled.a`
   color: gray;
   text-decoration: underline;

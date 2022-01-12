@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
-import { POST_PERSONALINFORMATION_API } from '../../config/config.js';
-import Button from '../components/Button.js';
+// import { POST_PERSONALINFORMATION_API } from '../../config/config.js';
+import Button from './components/Button.js';
 import styled from 'styled-components';
 
 export default function ReservAside({
+  totalPrice,
   bookerInfo,
-  passengerInfo,
   passengerInfoList,
 }) {
   const [asideFixer, setAsideFixer] = useState(false);
@@ -66,29 +66,28 @@ export default function ReservAside({
 
   const submitPersonalInfoForm = {
     headers: {
-      // Authrization: localStorage.getItem('token'),
+      // Authorization: localStorage.getItem('jwt_token'),
     },
     body: JSON.stringify({
-      name: bookerInfo.name,
-      email: bookerInfo.email,
-      phone_number: bookerInfo.phonenumber,
+      customer: bookerInfo,
       passengerInfo: passengerInfoList,
       nickname: 'dfdfd',
       kakao_id: 'kakao',
-      total_price: '60',
+      total_price: totalPrice,
       number_of_tickets: 3,
+      flight_seats_id: [1, 2],
       payments_method: 'card',
     }),
   };
 
-  const submitPersonalInfo = () => {
-    fetch(POST_PERSONALINFORMATION_API, {
-      method: 'POST',
-      ...submitPersonalInfoForm,
-    })
-      .then(res => res.json())
-      .then(data => console.log(data));
-  };
+  // const submitPersonalInfo = () => {
+  //   fetch(POST_PERSONALINFORMATION_API, {
+  //     method: 'POST',
+  //     ...submitPersonalInfoForm,
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => console.log(data));
+  // };
 
   return (
     <Griditem>
@@ -97,7 +96,7 @@ export default function ReservAside({
         <FatHr />
         <Row>
           <span>주문 금액</span>
-          <span>${}원</span>
+          <span>{totalPrice}원</span>
         </Row>
         <Row>
           <span>발권 수수료 면제</span>
@@ -106,7 +105,7 @@ export default function ReservAside({
         <br />
         <TotalPrice>
           <span>총 결제 금액</span>
-          <span>${}원</span>
+          <span>{totalPrice - 2000}원</span>
         </TotalPrice>
         <br />
         <P>약관 동의</P>
@@ -162,9 +161,9 @@ export default function ReservAside({
         <Row justifycontent="center">
           <Button
             type="button"
-            onClick={submitPersonalInfo}
+            // onClick={submitPersonalInfo}
             value="결제하기"
-            // disabled={true} //함수달기
+            disabled={!isCheckedAll}
             bgc={props => props.theme.color.primary_400}
             color="white"
           />

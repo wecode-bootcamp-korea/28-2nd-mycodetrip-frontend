@@ -13,4 +13,7 @@ const StyledButton = styled.input`
   padding: 10px 12px;
   font-size: 16px;
   font-weight: bold;
+  color: ${props => (props.color ? props.color : 'black')};
+  background-color: ${props => (props.bgc ? props.bgc : 'white')};
+  opacity: ${props => (props.disabled ? 0.6 : 1)};
 `;

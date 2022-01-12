@@ -1,10 +1,7 @@
 import { useState } from 'react';
-
 import useQueryString from '../../../hooks/useQueryString';
-
 import SelectPassenger from './../../Modals/SelectPassenger/SelectPassenger';
 import styled from 'styled-components';
-
 import { BsPerson } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
 

@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 // import useQueryString from '../../../hooks/useQueryString';
 import useFetch from '../../hooks/useFetch';
 import styled from 'styled-components';
-import FlightInfoCard from '../../components/FlightInfoCard/FlightInfoCard';
+import ReservedFlightTable from '../../components/ReservedFlightTable/ReservedFlightTable.js';
 import Button from './components/Button';
 
-export default function ReservedTicketInfo() {
+export default function ReservedTicketInfo({
+  data,
+  totalPrice,
+  setTotalPrice,
+  adult,
+}) {
   const [hiddenDisplayPrice, setHiddenDisplayPrice] = useState(true);
-  const { data, isLoading, error } = useFetch(
-    './data/flights/flightDetail.json'
-  );
+
   // const {
   //   searchParams,
   //   toggleQueryString,
@@ -20,11 +23,12 @@ export default function ReservedTicketInfo() {
   //돈구하기
   // useEffect(() => {
   //   const getTotalPrice = () => {
-  //     const getObj = { ...data.price };
-  //     console.log(getObj);
+  //     const TicketPrice = data.map(i => i.price);
+  //     const sumPrice = TicketPrice.reduce((sum, currVal) => sum + currVal);
+  //     return sumPrice;
   //   };
-  //   getTotalPrice();
-  // }, []);
+  //   if (data.length > 0) return setTotalPrice(getTotalPrice());
+  // }, [data]);
 
   const handleDisplayPrice = e => {
     if (hiddenDisplayPrice === false) {
@@ -34,35 +38,36 @@ export default function ReservedTicketInfo() {
     }
   };
 
-  if (isLoading) return <h1>Loading</h1>;
-  if (error) return <h1>Sorry! </h1>;
   return (
     <ReservedTicketInfoWrapper>
       <P>선택한 항공권</P>
-      {data.map((x, index) => (
-        <FlightInfoCard key={index} flightInfo={x} />
+      {/* {console.log(data?.flights)} */}
+      {data?.flghts.map((x, index) => (
+        <ReservedFlightTable key={index} reservedFlightInfo={x} />
       ))}
       <div hidden={hiddenDisplayPrice}>
         <P fontsize="16px">성인$명</P>
         <FatHr />
         <Row>
           <span>항공요금</span>
-          <span>n*price 원</span>
+          <span>{totalPrice} 원</span>
         </Row>
         <Row>
           <span>유류할증료</span>
-          <span>x원</span>
+          <span>0원</span>
         </Row>
         <FatHr />
         <Row fontsize="16px">
           <span>성인 총 요금</span>
-          <span>n*price + x 원</span>
+          <span>
+            {totalPrice} x {adult} = {totalPrice * adult} 원
+          </span>
         </Row>
       </div>
       <FatHr />
       <Row>
         <span>총 상품 금액</span>
-        <span>n*price + x 원</span>
+        <span>{totalPrice * adult} 원</span>
       </Row>
       <ButtonWrapper>
         <Button
