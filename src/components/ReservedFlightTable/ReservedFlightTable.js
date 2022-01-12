@@ -6,6 +6,7 @@ import { getKORFormattedDate } from '../../utils/getTime';
 const ReservedFlightTable = ({ reservedFlightInfo }) => {
   return (
     <Container>
+      {console.log(reservedFlightInfo)}
       {reservedFlightInfo?.map((flightInfo, idx) => (
         <div key={idx}>
           <FlightBadge flightInfo={flightInfo} flightType={idx} size="lg">

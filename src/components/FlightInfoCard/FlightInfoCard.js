@@ -22,7 +22,6 @@ const FlightInfoCard = ({
     departure,
   } = flightInfo;
 
-  // console.log(flightInfo);
   const updateQSWithThisFlight = flightID => {
     selected ? reselectFlight(flightID) : selectThisFlight(flightID);
   };
@@ -54,19 +53,14 @@ const FlightInfoCard = ({
       </FlightInfo>
 
       <Typography>{isDiscount ? '할인석' : '일반석'}</Typography>
-      {selected ? (
-        <>
-          <Typography>{tickets}석</Typography>
-          <FlightPriceInfo>{price.toLocaleString()}원</FlightPriceInfo>
-          <Button
-            selected={selected}
-            onClick={() => updateQSWithThisFlight(id)}
-          >
-            {selected ? '항공권 변경' : '선택'}
-          </Button>
-        </>
+      <Typography>{tickets}석</Typography>
+      <FlightPriceInfo>{price.toLocaleString()}원</FlightPriceInfo>
+      {baggage ? (
+        `무료 수하물 ${baggage}kg`
       ) : (
-        <Typography>무료 수하물 15kg</Typography>
+        <Button selected={selected} onClick={() => updateQSWithThisFlight(id)}>
+          {selected ? '항공권 변경' : '선택'}
+        </Button>
       )}
     </Container>
   );

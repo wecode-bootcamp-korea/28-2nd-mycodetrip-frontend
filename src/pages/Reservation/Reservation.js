@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+// import useQueryString from '../../hooks/useQueryString.js';
+import useFetch from '../../hooks/useFetch';
 import ReservAside from './ReservAside';
 import ReservedTicketInfo from './ReservedTicketInfo';
 import BookerInfo from './BookerInfo';
 import PassengerInfos from './PassengerInfos';
 
 const PASSENGER_INFO_FORM = {
-  nationality: '',
+  nationality: 'KOR',
   family_name: '',
   given_name: '',
   birthday: '',
   sex: '',
 };
-const adult = 3; //change
 
 export default function Reservation() {
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [adult, setAdult] = useState(0);
+  const [departureFlight, setDepartureFlight] = useState({});
+  const [returnFlight, setReturnFlight] = useState({});
   const [bookerInfo, setBookerInfo] = useState({
     name: '',
     email: '',
@@ -24,32 +27,35 @@ export default function Reservation() {
   const initialPassengerInfo = Array(adult).fill(PASSENGER_INFO_FORM);
   const [passengerInfoList, setPassengerInfoList] =
     useState(initialPassengerInfo);
+  console.log(passengerInfoList);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const [passengerInfo, setPassengerInfo] = useState(initialPassengerInfo);
-
-  //요것은 adult 정보를 get 했을 때 다시 반응하도록
-  const howLongPassengerList = () => {
-    setPassengerInfoList(Array(adult).fill(PASSENGER_INFO_FORM));
-  };
+  useEffect(() => {
+    const string = window.location.search;
+    const searchParams = new URLSearchParams(string);
+    setAdult(Number(searchParams.get('adult')));
+    setDepartureFlight(searchParams.get('departure_flight'));
+    setReturnFlight(searchParams.get('return_flight'));
+  }, [adult]);
 
   return (
     <Container passengerNumber={initialPassengerInfo.length}>
       <Title>예약하기</Title>
       <ReservedTicketInfo
+        // data={data}
         adult={adult}
         totalPrice={totalPrice}
         setTotalPrice={setTotalPrice}
       />
       <ReservAside
         bookerInfo={bookerInfo}
-        passengerInfo={passengerInfo}
         passengerInfoList={passengerInfoList}
+        totalPrice={totalPrice}
       />
       <BookerInfo bookerInfo={bookerInfo} setBookerInfo={setBookerInfo} />
       <PassengerInfos
         passengerInfoList={passengerInfoList}
-        passengerInfo={passengerInfo}
-        setPassengerInfo={setPassengerInfo}
+        setPassengerInfoList={setPassengerInfoList}
       />
     </Container>
   );

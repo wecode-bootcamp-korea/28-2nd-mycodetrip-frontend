@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Input from './components/Input';
 import InputWrapper from './components/InputWrapper';
 
 export default function PassengerInfo({
-  passengerInfo,
-  setPassengerInfo,
   index,
+  passengerInfo,
+  passengerInfoList,
+  setPassengerInfoList,
 }) {
+  const [clickedButton, setClickedButton] = useState('');
+
   const validatefamily_name =
     passengerInfo.family_name.length >= 1 || passengerInfo.family_name === '';
   const validategiven_name =
@@ -18,7 +21,12 @@ export default function PassengerInfo({
 
   const handleInput = e => {
     const { name, value } = e.target;
-    setPassengerInfo({ ...passengerInfo, [name]: value });
+    let targetObj = { ...passengerInfoList[index], [name]: value };
+    setPassengerInfoList([
+      ...passengerInfoList.slice(0, index),
+      targetObj,
+      ...passengerInfoList.slice(index + 1),
+    ]);
   };
 
   const getOnlyDate = e => {
@@ -33,12 +41,17 @@ export default function PassengerInfo({
     } else {
       toDate =
         toNumber.substr(0, 4) +
-        '.' +
+        '-' +
         toNumber.substr(5, 2) +
-        '.' +
+        '-' +
         toNumber.substr(6);
     }
-    setPassengerInfo({ ...passengerInfo, [name]: toDate });
+    let targetObj = { ...passengerInfoList[index], [name]: toDate };
+    setPassengerInfoList([
+      ...passengerInfoList.slice(0, index),
+      targetObj,
+      ...passengerInfoList.slice(index + 1),
+    ]);
   };
 
   return (
@@ -46,7 +59,7 @@ export default function PassengerInfo({
       <P>탑승객 {index + 1}</P>
       <InputWrapper>
         <label htmlFor="nationality">국적</label>
-        <Select name="nationality" id="nationality">
+        <Select name="nationality" id="nationality" onChange={handleInput}>
           <option value="KOR">대한민국</option>
           <option value="GHA">가나</option>
           <option value="GAB">가봉</option>
@@ -308,26 +321,26 @@ export default function PassengerInfo({
           생년월일의 형식이 유효하지 않습니다.
         </span>
       </InputWrapper>
-      <RadioWrapper>
-        <RadioDiv>
-          <Radio
-            type="radio"
-            name="sex"
-            id="male"
-            value="male"
-            onClick={handleInput}
-          />
-          <Label htmlFor="male">남성</Label>
-          <Radio
-            type="radio"
-            name="sex"
-            id="female"
-            value="female"
-            onClick={handleInput}
-          />
-          <Label htmlFor="female">여성</Label>
-        </RadioDiv>
-      </RadioWrapper>
+      <ButtonWrapper>
+        <WhatAreYour23thChromosomes
+          name="sex"
+          value="남성"
+          bgc={clickedButton === 'M'}
+          onClick={e => {
+            handleInput(e);
+            setClickedButton('M');
+          }}
+        />
+        <WhatAreYour23thChromosomes
+          name="sex"
+          value="여성"
+          bgc={clickedButton === 'F'}
+          onClick={e => {
+            handleInput(e);
+            setClickedButton('F');
+          }}
+        />
+      </ButtonWrapper>
     </Container>
   );
 }
@@ -361,48 +374,22 @@ const Select = styled.select`
   }
 `;
 
-const RadioWrapper = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
-  flex-flow: column;
-  padding: 25px 5px 5px 5px;
-
-  span {
-    padding: 5px 0px;
-    font-size: 12px;
-  }
-
-  .noticeAboutInput {
-    color: ${props => props.theme.color.gray_500};
-  }
-
-  .validationHint {
-    color: #f77f01;
-  }
-`;
-
-const RadioDiv = styled.div`
-  display: flex;
-  flex-flow: row wrap;
   justify-content: space-between;
   width: 250px;
   height: 40px;
 `;
 
-const Label = styled.label`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const WhatAreYour23thChromosomes = styled.input.attrs({ type: 'button' })`
   width: 120px;
   height: 40px;
   border: 1px solid ${props => props.theme.color.gray_300};
   border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-`;
+  background-color: ${props =>
+    props.bgc ? props.theme.color.primary_300 : 'white'};
 
-const Radio = styled.input`
-  display: none;
-  &:checked + label {
-    background-color: ${({ theme }) => theme.color.primary_300};
+  :hover {
+    cursor: pointer;
   }
 `;

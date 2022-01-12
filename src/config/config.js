@@ -1,4 +1,4 @@
-const BASE_URL = 'http://10.58.2.221:8000';
+const BASE_URL = 'http://localhost:3000';
 
 // 사용되는 API 주소
 export const GET_SEARCHED_TICKETS_API = `${BASE_URL}/data/main/searchedTickets.json`;
