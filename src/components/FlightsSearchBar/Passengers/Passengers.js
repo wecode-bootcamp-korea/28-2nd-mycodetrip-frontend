@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import SelectPassenger from './../../Modals/SelectPassenger/SelectPassenger';
-
+import react, { useState } from 'react';
 import styled from 'styled-components';
 
 import { BsPerson } from 'react-icons/bs';
