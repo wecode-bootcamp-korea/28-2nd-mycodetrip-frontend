@@ -3,37 +3,32 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // import { KAKAO_AUTH_URL, CLIENT_ID } from './OAuth';
 // import { API } from '../../config';
-
 function Auth() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
-
   const loginKakao = () => {
     const { Kakao } = window;
-
     Kakao.Auth.login({
       success: function (authObj) {
-        // console.log(authObj);
-        fetch('http://1f1f-211-106-114-186.ngrok.io/users/authorize', {
+        console.log(authObj);
+        fetch('http://10.58.6.23:8000/users/authorize', {
           method: 'POST',
           headers: { Authorization: authObj.access_token },
         })
           .then(res => res.json())
           .then(data => {
-            // console.log(data);
-            if (data.message) {
-              localStorage.setItem('token', data.token);
+            console.log(data);
+            if (data) {
+              localStorage.setItem('token', data.jwt_token);
               navigate('/');
             }
           });
       },
     });
   };
-
   const toggleLogin = () => {
     setIsLogin(prev => !prev);
   };
-
   return (
     <Container>
       <AuthContainer>
@@ -65,13 +60,13 @@ function Auth() {
 export default Auth;
 const Container = styled.section`
   padding: 0px;
-  margin: 100px 0px 100px 448px;
+  margin: 120px 0px 100px 740px;
 `;
 const AuthContainer = styled.div`
-  border: 1px solid #b9bbb6;
-  height: 450px;
-  width: 420px;
-  padding: 50px;
+  border: 1px solid #dcdcdc;
+  height: 460px;
+  width: 450px;
+  padding: 60px;
 `;
 const TextBox = styled.div`
   line-height: 1.5;
@@ -113,12 +108,12 @@ const Social = styled.div`
 `;
 const Socialtext = styled.div`
   margin: 5px 23px;
-  color: #b9bbb6;
+  color: #a9a9a9;
 `;
 const YetSignIn = styled.p`
   line-height: 2.5;
   display: inline;
-  color: #b9bbb6;
+  color: #a9a9a9;
   padding-left: 42px;
 `;
 const BtnText = styled.span`

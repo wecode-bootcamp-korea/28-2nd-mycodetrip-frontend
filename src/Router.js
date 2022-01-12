@@ -8,13 +8,13 @@ import FlightsCheck from './pages/FlightsCheck/FlightsCheck';
 import Reservation from './pages/Reservation/Reservation';
 import Mypage from './pages/MyPage/Mypage';
 
-import Navbar from './components/Navbar/Navbar';
+// import Navbar from './components/Navbar/Navbar'; //
 import Footer from './components/Footer/Footer';
 
 function Router() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />
