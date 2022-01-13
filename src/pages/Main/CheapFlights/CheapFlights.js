@@ -33,7 +33,8 @@ const CheapFlights = () => {
                 <CgAirplane />
                 {item.departure} <AiOutlineArrowRight /> {item.arrival}
                 <br />
-                {item.date_departure} ~ {item.date_arrival}
+                {/* {getParsedTime(item.date_departure)} ~{' '} */}
+                {/* {getParsedTime(item.date_arrival)} */}
               </TicketDateInfo>
               <em>24500원 ~</em>
               <b>{item.departure_date}월 출발</b>
@@ -69,6 +70,7 @@ const Ticket = styled.li`
   width: 250px;
   margin: 20px 20px 0 0;
   border-radius: 2px;
+  background: #fff;
   box-shadow: inset 0 0 0 1px rgb(132 140 148 / 30%);
 `;
 
