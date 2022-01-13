@@ -1,5 +1,6 @@
 import SearchedTickets from './SearchedTickets/SearchedTickets';
 import CarouselSlick from './CarouselSlick/CarouselSlick';
+import CheapFlights from './CheapFlights/CheapFlights';
 import RouteSearch from './../../components/RouteSearch/RouteSearch';
 
 const Main = () => {
@@ -8,6 +9,7 @@ const Main = () => {
       <RouteSearch />
       <SearchedTickets />
       <CarouselSlick />
+      <CheapFlights />
     </main>
   );
 };
