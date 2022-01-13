@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 
+import styled from 'styled-components';
+
 import { ImLoop } from 'react-icons/im';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-import styled from 'styled-components';
 import { GET_SEARCHEDTICKETS_API } from './../../../config/config.js';
 const TOTAL_SLIDES = 1;
 
