@@ -41,7 +41,7 @@ export default CarouselSlick;
 
 export const StyledSlider = styled(Slider)`
   height: 128px; //슬라이드 컨테이너 영역
-  overflow: hidden;
+  /* overflow: hidden; */
 
   .slick-list {
     // 부모

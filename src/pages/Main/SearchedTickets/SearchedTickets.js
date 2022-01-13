@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
-
 import { ImLoop } from 'react-icons/im';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import { GET_SEARCHEDTICKETS_API } from './../../../config/config.js';
+
 const TOTAL_SLIDES = 1;
 
 const SearchedTickets = () => {
@@ -66,7 +66,8 @@ const SearchedTickets = () => {
                     <em>{card.arrival}</em>
                   </FlightRoute>
                   <FlightInfo>
-                    {card.date_departure} - {card.date_arrival} · 성인
+                    {/* {getParsedTime(card.date_departure)} -{' '} */}
+                    {/* {getParsedTime(card.date_arrival)} · 성인 */}
                     {card.personnel_count} · {card.seat_type}
                   </FlightInfo>
                 </FlightContent>
@@ -125,6 +126,7 @@ const TicketItem = styled.li`
   height: 100%;
   margin-right: 20px;
   margin-top: 20px;
+  background: #fff;
 
   &:nth-of-type(3n) {
     margin-right: 0;

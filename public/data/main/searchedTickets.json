@@ -4,8 +4,8 @@
     "trip_type": "왕복",
     "departure": "김포 (GMP)",
     "arrival": "부산 (PUS)",
-    "date_departure": "1월 12일",
-    "date_arrival": "1월 20일",
+    "date_departure": "2022-04-20T03:20Z",
+    "date_arrival": "2022-04-22T03:20Z",
     "personnel_count": 2,
     "seat_type": "전체"
   },
@@ -14,8 +14,8 @@
     "trip_type": "왕복",
     "departure": "김포 (GMP)",
     "arrival": "부산 (PUS)",
-    "date_departure": "1월 12일",
-    "date_arrival": "1월 20일",
+    "date_departure": "2022-07-06T03:20Z",
+    "date_arrival": "2022-07-22T03:20Z",
     "personnel_count": 2,
     "seat_type": "전체"
   },
@@ -24,8 +24,8 @@
     "trip_type": "편도",
     "departure": "제주 (CJU)",
     "arrival": "부산 (PUS)",
-    "date_departure": "1월 20일",
-    "date_arrival": "2월 1일",
+    "date_departure": "2022-01-25T03:20Z",
+    "date_arrival": "2022-01-26T03:20Z",
     "personnel_count": 5,
     "seat_type": "일반석"
   },
@@ -34,8 +34,8 @@
     "trip_type": "편도",
     "departure": "제주 (CJU)",
     "arrival": "인천 (PUS)",
-    "date_departure": "12월 20일",
-    "date_arrival": "12월 25일",
+    "date_departure": "2022-03-01T03:20Z",
+    "date_arrival": "2022-03-10T03:20Z",
     "personnel_count": 2,
     "seat_type": "일반석"
   }

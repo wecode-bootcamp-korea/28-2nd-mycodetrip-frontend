@@ -4,8 +4,8 @@
     "ticketImg": "https://images.unsplash.com/photo-1642012267677-54fb90e4eae5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
     "departure": "서울",
     "arrival": "제주",
-    "date_departure": "1월 12일",
-    "date_arrival": "1월 20일",
+    "date_departure": "2022-03-22T03:20Z",
+    "date_arrival": "2022-03-22T03:20Z",
     "price": 24500,
     "departure_date": 1
   },
@@ -14,8 +14,8 @@
     "ticketImg": "https://images.unsplash.com/photo-1641941003546-bd3a3456f5ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
     "departure": "김포",
     "arrival": "부산",
-    "date_departure": "2월 12일",
-    "date_arrival": "3월 10일",
+    "date_departure": "2022-02-01T03:20Z",
+    "date_arrival": "2022-03-01T03:20Z",
     "price": 25000,
     "departure_date": 2
   }
