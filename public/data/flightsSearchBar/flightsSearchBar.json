@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "category": "국내",
+    "cities": [
+      {
+        "id": 1,
+        "name": "제주",
+        "code": "CJU"
+      },
+      {
+        "id": 2,
+        "name": "김포",
+        "code": "GMP"
+      },
+      {
+        "id": 3,
+        "name": "인천",
+        "code": "ICN"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "category": "아시아",
+    "cities": [
+      {
+        "id": 4,
+        "name": "다낭",
+        "code": "DAD"
+      },
+      {
+        "id": 5,
+        "name": "대만",
+        "code": "TPE"
+      },
+      {
+        "id": 6,
+        "name": "방콕",
+        "code": "BKK"
+      }
+    ]
+  }
+]

@@ -1,16 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import SelectCities from '../SelectCities/SelectCities';
+import SelectCities from './../../Modals/SelectCities/SelectCities';
 
 import styled from 'styled-components';
 
 import { ImLoop } from 'react-icons/im';
+
+import { GET_SELECTCITIES_API } from '../../../config/config.js';
 
 const RouteSearch = () => {
   const [isModalOpen, setIsModalOpen] = useState({
     departure: false,
     arrival: false,
   });
+  const [citiesData, setCitiesData] = useState([]);
+  const [selectCity, setSelectCity] = useState({
+    departure: {
+      name: '',
+      code: '',
+    },
+    arrival: {
+      name: '',
+      code: '',
+    },
+  });
+
+  useEffect(() => {
+    fetch(`${GET_SELECTCITIES_API}`)
+      .then(res => res.json())
+      .then(data => setCitiesData(data));
+  }, []);
 
   const modalOpen = e => {
     const { name } = e.target;
@@ -23,14 +42,21 @@ const RouteSearch = () => {
         <RouteInput
           onClick={modalOpen}
           name="departure"
-          value="서울"
+          value={
+            selectCity.departure.name.length
+              ? `${selectCity.departure.name} ${selectCity.departure.code}`
+              : '서울 (SEL)'
+          }
           type="text"
           placeholder="출발지가 어디인가요?"
           readOnly="readonly"
         />
         {isModalOpen.departure && (
           <SelectCities
-            name="departure"
+            citiesData={citiesData}
+            selectCity={selectCity}
+            setSelectCity={setSelectCity}
+            routeName="departure"
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
           />
@@ -43,13 +69,21 @@ const RouteSearch = () => {
         <RouteInput
           onClick={modalOpen}
           name="arrival"
+          value={
+            selectCity.arrival.name.length
+              ? `${selectCity.arrival.name} ${selectCity.arrival.code}`
+              : ''
+          }
           type="text"
           placeholder="도착지가 어디인가요?"
           readOnly="readonly"
         />
         {isModalOpen.arrival && (
           <SelectCities
-            name="arrival"
+            citiesData={citiesData}
+            selectCity={selectCity}
+            setSelectCity={setSelectCity}
+            routeName="arrival"
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
           />
@@ -62,7 +96,7 @@ const RouteSearch = () => {
 export default RouteSearch;
 
 const RouteSearchWrap = styled.section`
-  margin: 50px auto; // 컴포넌트 합치면 제거 예정
+  /* margin: 50px auto; // 컴포넌트 합치면 제거 예정 */
   width: 422px;
   height: 48px;
   line-height: 48px;

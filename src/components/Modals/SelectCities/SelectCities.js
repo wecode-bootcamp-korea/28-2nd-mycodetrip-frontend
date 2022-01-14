@@ -4,9 +4,16 @@ import styled from 'styled-components';
 
 import { FiX } from 'react-icons/fi';
 
-const SelectCities = ({ isModalOpen, setIsModalOpen, name }) => {
+const SelectCities = ({
+  isModalOpen,
+  setIsModalOpen,
+  routeName,
+  citiesData,
+  selectCity,
+  setSelectCity,
+}) => {
   const hideModal = () => {
-    setIsModalOpen({ ...isModalOpen, [name]: false });
+    setIsModalOpen({ ...isModalOpen, [routeName]: false });
   };
 
   useEffect(() => {
@@ -24,35 +31,46 @@ const SelectCities = ({ isModalOpen, setIsModalOpen, name }) => {
     };
   }, []);
 
+  const showCityName = e => {
+    const { cityName, cityCode } = e.target.dataset;
+    setSelectCity({
+      ...selectCity,
+      [routeName]: {
+        name: cityName,
+        code: cityCode,
+      },
+    });
+    hideModal();
+  };
+
   return (
     <>
-      {isModalOpen[name] && <ModalBackGround name={name} onClick={hideModal} />}
-      <ModalWrap>
+      {isModalOpen[routeName] && (
+        <ModalBackGround name={routeName} onClick={hideModal} />
+      )}
+      <ModalWrap name={routeName}>
         <Title>도시 선택</Title>
-        <CloseBtn name={name} onClick={hideModal}>
+        <CloseBtn name={routeName} onClick={hideModal}>
           <FiX />
         </CloseBtn>
         <CitiesTableWrap>
           <table>
             <Tbody>
-              <tr>
-                <th>국내</th>
-                <td>제주</td>
-                <td>김포</td>
-                <td>인천</td>
-              </tr>
-              <tr>
-                <th>아시아</th>
-                <td>다낭</td>
-                <td>대만</td>
-                <td>방콕</td>
-              </tr>
-              <tr>
-                <th>중국</th>
-                <td>베이징</td>
-                <td>상해</td>
-                <td>리장</td>
-              </tr>
+              {citiesData.map(country => (
+                <tr key={country.id}>
+                  <th>{country.category}</th>
+                  {country.cities.map(city => (
+                    <td
+                      key={city.id}
+                      data-city-name={city.name}
+                      data-city-code={city.code}
+                      onClick={showCityName}
+                    >
+                      {city.name}
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </Tbody>
           </table>
         </CitiesTableWrap>
