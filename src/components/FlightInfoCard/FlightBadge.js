@@ -1,17 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { CgArrowLongRight } from 'react-icons/cg';
 
-const FlightBadge = ({ flightType, flightInfo }) => {
+const FlightBadge = ({ flightType, flightInfo, size = 'md', children }) => {
   const isDepatureOrArrive = flightType === 0 ? '가는편' : '오는편';
 
   return (
-    <Container>
+    <Container size={size}>
       <InfoBadge>{isDepatureOrArrive}</InfoBadge>
       <Flex>
         <span>{flightInfo?.departure?.city}</span>
         <CgArrowLongRight />
         <span>{flightInfo?.arrival?.city}</span>
       </Flex>
+      {children}
     </Container>
   );
 };
@@ -22,6 +23,17 @@ const Container = styled.div`
   ${({ theme }) => theme.flex};
   margin-right: 2em;
   font-size: 0.875em;
+
+  ${({ size }) =>
+    size === 'lg' &&
+    css`
+      font-size: 1.125rem;
+      padding-block: 1em;
+    `}
+
+  p:last-child {
+    margin-left: 1rem;
+  }
 `;
 
 const InfoBadge = styled.div`

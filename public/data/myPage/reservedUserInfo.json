@@ -1,0 +1,23 @@
+{
+  "result": {
+    "type": "reservedUserInfo",
+    "reservation_number": 1,
+    "total_price": 107000,
+    "number_of_tickets": 3,
+    "payments_method": "card",
+    "flights": [
+      {
+        "id": 1,
+        "title": ["쁘띠민석", "서울", "제주"],
+        "travel_date": "2022-02-11T20:32Z",
+        "logo": "https://fakeimg.pl/100x100/"
+      },
+      {
+        "id": 2,
+        "title": ["프로찬주", "제주", "서울"],
+        "travel_date": "2022-02-16T13:37Z",
+        "logo": "https://fakeimg.pl/100x100/"
+      }
+    ]
+  }
+}
