@@ -25,14 +25,14 @@
       "airline": "희원항공",
       "aircraft": "LJ331",
       "departure": {
-        "time": "2022-03-22T01:08Z",
-        "city": "광주",
-        "code": "GMP"
-      },
-      "arrival": {
         "time": "2022-03-22T03:20Z",
         "city": "제주",
         "code": "CJU"
+      },
+      "arrival": {
+        "time": "2022-03-22T01:08Z",
+        "city": "광주",
+        "code": "GMP"
       },
       "tickets": 1,
       "price": 70900,

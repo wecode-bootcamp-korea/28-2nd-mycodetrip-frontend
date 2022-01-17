@@ -1,6 +1,18 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  :root { 
+    --bg-dark-mode: #222;
+    --bg-light-mode: #f0f3f5;
+  }
+  .html { 
+    background-color: var(--bg-light-mode);
+
+  }
+  .html.dark { 
+    background-color: var(--bg-dark-mode);
+  }
+
   *,*::before, *::after { 
     margin: 0;
     padding : 0;

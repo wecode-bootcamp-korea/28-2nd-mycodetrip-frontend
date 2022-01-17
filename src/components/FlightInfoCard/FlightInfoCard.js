@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { CgArrowLongRight } from 'react-icons/cg';
-import { getParsedTime, getFlightTime } from '../../utils/getTime';
+import FlightTimeInfo from './FlightTimeInfo';
 
 const FlightInfoCard = ({
   flightInfo,
@@ -9,19 +8,6 @@ const FlightInfoCard = ({
   selected,
   children,
 }) => {
-  const {
-    id,
-    logo,
-    airline,
-    aircraft,
-    isDiscount,
-    tickets,
-    price,
-    baggage,
-    arrival,
-    departure,
-  } = flightInfo;
-
   const updateQSWithThisFlight = flightID => {
     selected ? reselectFlight(flightID) : selectThisFlight(flightID);
   };
@@ -30,35 +16,23 @@ const FlightInfoCard = ({
     <Container selected={selected}>
       {children}
       <FlightLogo>
-        <FlightLogoImg src={logo} alt={logo} />
+        <FlightLogoImg src={flightInfo.logo} alt={flightInfo.logo} />
         <FlexCol>
-          <h2>{airline}</h2>
-          <h3>{aircraft}</h3>
+          <h2>{flightInfo.airline}</h2>
+          <h3>{flightInfo.aircraft}</h3>
         </FlexCol>
       </FlightLogo>
-
-      <FlightInfo>
-        <Flex>
-          <span>{getParsedTime(departure.time)}</span>
-          <CgArrowLongRight size={30} />
-          <span>{getParsedTime(arrival.time)}</span>
-        </Flex>
-        <Flex>
-          <Typography color="gray_500">{departure.code}</Typography>
-          <Typography color="gray_500">
-            {getFlightTime(departure.time, arrival.time)}
-          </Typography>
-          <Typography color="gray_500">{arrival.code}</Typography>
-        </Flex>
-      </FlightInfo>
-
-      <Typography>{isDiscount ? '할인석' : '일반석'}</Typography>
-      <Typography>{tickets}석</Typography>
-      <FlightPriceInfo>{price.toLocaleString()}원</FlightPriceInfo>
-      {baggage ? (
-        `무료 수하물 ${baggage}kg`
+      <FlightTimeInfo flightInfo={flightInfo} />
+      <Typography>{flightInfo.isDiscount ? '할인석' : '일반석'}</Typography>
+      <Typography>{flightInfo.tickets}석</Typography>
+      <FlightPriceInfo>{flightInfo.price.toLocaleString()}원</FlightPriceInfo>
+      {flightInfo.baggage ? (
+        `무료 수하물 ${flightInfo.baggage}kg`
       ) : (
-        <Button selected={selected} onClick={() => updateQSWithThisFlight(id)}>
+        <Button
+          selected={selected}
+          onClick={() => updateQSWithThisFlight(flightInfo.id)}
+        >
           {selected ? '항공권 변경' : '선택'}
         </Button>
       )}
@@ -103,18 +77,6 @@ const FlightLogo = styled.section`
 const FlightLogoImg = styled.img`
   max-width: 2.5rem;
 `;
-
-const FlightInfo = styled.section`
-  display: grid;
-  place-items: center;
-
-  svg {
-    margin-inline: 0.5em;
-    color: ${({ theme }) => theme.color.gray_500};
-    transform: scale(1.5, 0.5);
-  }
-`;
-
 const Typography = styled.span`
   color: ${({ theme, color }) => (color ? theme.color[color] : 'inherit')};
   font-size: 0.875rem;
@@ -138,11 +100,6 @@ const Button = styled.button`
 
 const FlightPriceInfo = styled.h2`
   font-size: 1em;
-`;
-
-const Flex = styled.div`
-  ${({ theme }) => theme.flex};
-  gap: 0.5rem;
 `;
 
 const FlexCol = styled.div`
