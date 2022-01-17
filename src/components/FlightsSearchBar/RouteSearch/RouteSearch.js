@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { ImLoop } from 'react-icons/im';
 
-import { GET_SELECTCITIES_API } from '../../../config/config.js';
+import { GET_SELECT_CITIES_API } from '../../../config/config.js';
 
 const RouteSearch = () => {
   const [isModalOpen, setIsModalOpen] = useState({
@@ -26,7 +26,7 @@ const RouteSearch = () => {
   });
 
   useEffect(() => {
-    fetch(`${GET_SELECTCITIES_API}`)
+    fetch(`${GET_SELECT_CITIES_API}`)
       .then(res => res.json())
       .then(data => setCitiesData(data));
   }, []);
