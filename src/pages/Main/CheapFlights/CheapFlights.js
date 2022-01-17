@@ -5,44 +5,52 @@ import styled from 'styled-components';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { CgAirplane } from 'react-icons/cg';
 
-import { GET_CHEAPFLIGHTS_API } from './../../../config/config.js';
+import { GET_CHEAP_FLIGHTS_API } from './../../../config/config.js';
 
 const CheapFlights = () => {
-  const [ticketData, setTicketData] = useState([]);
+  const [cheapFlightData, setCheapFlightData] = useState([]);
 
   useEffect(() => {
-    fetch(`${GET_CHEAPFLIGHTS_API}`)
+    fetch(`${GET_CHEAP_FLIGHTS_API}`)
       .then(res => res.json())
-      .then(data => setTicketData(data));
+      .then(data => setCheapFlightData(data));
   }, []);
 
   return (
-    <Container>
-      <Title>제주도 국내 최저가 항공권 🍊</Title>
-      <FlightsWrap>
-        {ticketData.map(item => (
-          <Ticket key={item.id}>
-            <TicketImg>
-              <img src={item.ticketImg} alt="" />
-            </TicketImg>
-            <TicketInfo>
-              <h4>
-                {item.departure} <AiOutlineArrowRight /> {item.arrival}
-              </h4>
-              <TicketDateInfo>
-                <CgAirplane />
-                {item.departure} <AiOutlineArrowRight /> {item.arrival}
-                <br />
-                {/* {getParsedTime(item.date_departure)} ~{' '} */}
-                {/* {getParsedTime(item.date_arrival)} */}
-              </TicketDateInfo>
-              <em>24500원 ~</em>
-              <b>{item.departure_date}월 출발</b>
-            </TicketInfo>
-          </Ticket>
-        ))}
-      </FlightsWrap>
-    </Container>
+    <>
+      {cheapFlightData.map((ticket, idx) => (
+        <Container key={idx}>
+          <Title>
+            {Object.keys(ticket).join() === '제주'
+              ? `제주도 국내 최저가 항공권 🍊`
+              : `파리 해외 최저가 항공권 🥖`}
+          </Title>
+          <FlightsWrap>
+            {ticket[Object.keys(ticket)].map(item => (
+              <Ticket key={item.id}>
+                <TicketImg>
+                  <img src={item.ticketImg} alt="ticketImage" />
+                </TicketImg>
+                <TicketInfo>
+                  <h4>
+                    {item.departure} <AiOutlineArrowRight /> {item.arrival}
+                  </h4>
+                  <TicketDateInfo>
+                    <CgAirplane />
+                    {item.departure} <AiOutlineArrowRight /> {item.arrival}
+                    <br />
+                    {/* {getParsedTime(item.date_departure)} ~{' '} */}
+                    {/* {getParsedTime(item.date_arrival)} */}
+                  </TicketDateInfo>
+                  <em>{item.price.toLocaleString()} ~</em>
+                  {/* <b>{item.departure_date}월 출발</b> */}
+                </TicketInfo>
+              </Ticket>
+            ))}
+          </FlightsWrap>
+        </Container>
+      ))}
+    </>
   );
 };
 

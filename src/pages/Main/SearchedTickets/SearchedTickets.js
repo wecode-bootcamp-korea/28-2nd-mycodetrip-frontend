@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ImLoop } from 'react-icons/im';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-import { GET_SEARCHEDTICKETS_API } from './../../../config/config.js';
+import { GET_SEARCHED_TICKETS_API } from './../../../config/config.js';
 
 const TOTAL_SLIDES = 1;
 
@@ -14,7 +14,7 @@ const SearchedTickets = () => {
   const slideRef = useRef(null);
 
   useEffect(() => {
-    fetch(`${GET_SEARCHEDTICKETS_API}`)
+    fetch(`${GET_SEARCHED_TICKETS_API}`)
       .then(res => res.json())
       .then(data => setFlightsData(data));
   }, []);
