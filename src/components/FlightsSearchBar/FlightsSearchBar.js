@@ -1,17 +1,54 @@
 import RouteSearch from './RouteSearch/RouteSearch';
 import Passengers from './Passengers/Passengers';
 
+import useQueryString from '../../hooks/useQueryString';
+
 import styled from 'styled-components';
 import DatePick from './DatePick/DatePick';
 
 const FlightsSearchBar = () => {
+  const { searchParams, navigateToWithQueryString } = useQueryString();
+
+  function getDestructuredParamsByKeys(keys) {
+    return keys.reduce((acc, queryKey) => {
+      acc[queryKey] = searchParams.get(queryKey);
+      return acc;
+    }, {});
+  }
+
+  const addSearchedData = () => {
+    // 로컬스토리지에 저장
+    const paramsValues = getDestructuredParamsByKeys([
+      'departure_city',
+      'arrival_city',
+      'departure_date',
+      'arrival_date',
+      'adult',
+    ]);
+
+    let localData = localStorage.getItem('searchedTicket');
+    if (localData == null) localData = [];
+
+    localData.push(paramsValues);
+    localStorage.setItem('searchedTicket', JSON.stringify(localData));
+  };
+
+  const goToFlightsList = () => {
+    navigateToWithQueryString('/flightsList');
+  };
+
+  const searchFlightsByInput = () => {
+    addSearchedData();
+    goToFlightsList();
+  };
+
   return (
     <Container>
       <SearchBarWrap>
         <RouteSearch />
         <DatePick />
         <Passengers />
-        <SearchBtn>검색</SearchBtn>
+        <SearchBtn onClick={searchFlightsByInput}>검색</SearchBtn>
       </SearchBarWrap>
     </Container>
   );

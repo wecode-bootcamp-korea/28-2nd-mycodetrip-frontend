@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import useQueryString from '../../../hooks/useQueryString';
+
 import SelectCities from './../../Modals/SelectCities/SelectCities';
 
 import styled from 'styled-components';
@@ -9,26 +11,19 @@ import { ImLoop } from 'react-icons/im';
 import { GET_SELECT_CITIES_API } from '../../../config/config.js';
 
 const RouteSearch = () => {
-  const [isModalOpen, setIsModalOpen] = useState({
-    departure: false,
-    arrival: false,
-  });
+  const { searchParams } = useQueryString();
   const [citiesData, setCitiesData] = useState([]);
-  const [selectCity, setSelectCity] = useState({
-    departure: {
-      name: '',
-      code: '',
-    },
-    arrival: {
-      name: '',
-      code: '',
-    },
+  const [isModalOpen, setIsModalOpen] = useState({
+    departure_city: false,
+    arrival_city: false,
   });
 
   useEffect(() => {
     fetch(`${GET_SELECT_CITIES_API}`)
-      .then(res => res.json())
-      .then(data => setCitiesData(data));
+      .then(response => response.json())
+      .then(data => {
+        setCitiesData(data.result.data);
+      });
   }, []);
 
   const modalOpen = e => {
@@ -36,27 +31,45 @@ const RouteSearch = () => {
     setIsModalOpen({ ...isModalOpen, [name]: true });
   };
 
+  const departure_city = searchParams.get('departure_city');
+  const arrival_city = searchParams.get('arrival_city');
+
+  const findCityNameByCode = code => {
+    const fetchedCities = citiesData.reduce((acc, countryObj) => {
+      for (const cityObj of countryObj.city) {
+        acc.push(cityObj);
+      }
+      return acc;
+    }, []);
+    const matchedCityByCode = fetchedCities.filter(city => city.code === code);
+    return matchedCityByCode;
+  };
+
+  const currentRouteObj = (defaultName, defaultCode, cityCodeByParams) => {
+    const matchedCity = findCityNameByCode(cityCodeByParams)[0];
+    return matchedCity
+      ? `${matchedCity.name} ${matchedCity.code}`
+      : `${defaultName} ${defaultCode}`;
+  };
+
+  const currDepartureObj = currentRouteObj('서울', 'SEL', departure_city);
+  const currArrivalObj = currentRouteObj('', '', arrival_city);
+
   return (
     <RouteSearchWrap>
       <InputWrap>
         <RouteInput
           onClick={modalOpen}
-          name="departure"
-          value={
-            selectCity.departure.name.length
-              ? `${selectCity.departure.name} ${selectCity.departure.code}`
-              : '서울 (SEL)'
-          }
+          name="departure_city"
+          value={currDepartureObj}
           type="text"
           placeholder="출발지가 어디인가요?"
           readOnly="readonly"
         />
-        {isModalOpen.departure && (
+        {isModalOpen.departure_city && (
           <SelectCities
             citiesData={citiesData}
-            selectCity={selectCity}
-            setSelectCity={setSelectCity}
-            routeName="departure"
+            routeName="departure_city"
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
           />
@@ -68,22 +81,16 @@ const RouteSearch = () => {
       <InputWrap>
         <RouteInput
           onClick={modalOpen}
-          name="arrival"
-          value={
-            selectCity.arrival.name.length
-              ? `${selectCity.arrival.name} ${selectCity.arrival.code}`
-              : ''
-          }
+          name="arrival_city"
+          value={currArrivalObj}
           type="text"
           placeholder="도착지가 어디인가요?"
           readOnly="readonly"
         />
-        {isModalOpen.arrival && (
+        {isModalOpen.arrival_city && (
           <SelectCities
             citiesData={citiesData}
-            selectCity={selectCity}
-            setSelectCity={setSelectCity}
-            routeName="arrival"
+            routeName="arrival_city"
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
           />
