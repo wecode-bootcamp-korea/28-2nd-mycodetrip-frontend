@@ -35,3 +35,12 @@ export const getKORFormattedDate = (isoDate, withinYear = false) => {
   const formattedDate = `${month}월 ${day}일 (${dayOfIsoDate})`;
   return withinYear ? `${year}년 ` + formattedDate : formattedDate;
 };
+
+export const getParsedDate = isoDate => {
+  const givenDate = new Date(isoDate);
+  const [year, month, date] = givenDate
+    .toLocaleDateString()
+    .split('.')
+    .map(date => date.trim());
+  return `${year}-${month}-${date}`;
+};

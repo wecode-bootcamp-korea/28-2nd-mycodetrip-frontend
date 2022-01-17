@@ -3,15 +3,15 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { FiX } from 'react-icons/fi';
+import useQueryString from '../../../hooks/useQueryString';
 
 const SelectCities = ({
   isModalOpen,
   setIsModalOpen,
   routeName,
   citiesData,
-  selectCity,
-  setSelectCity,
 }) => {
+  const { reflectUserSelectQueries } = useQueryString();
   const hideModal = () => {
     setIsModalOpen({ ...isModalOpen, [routeName]: false });
   };
@@ -32,14 +32,8 @@ const SelectCities = ({
   }, []);
 
   const showCityName = e => {
-    const { cityName, cityCode } = e.target.dataset;
-    setSelectCity({
-      ...selectCity,
-      [routeName]: {
-        name: cityName,
-        code: cityCode,
-      },
-    });
+    const { cityCode } = e.target.dataset;
+    reflectUserSelectQueries({ [routeName]: cityCode });
     hideModal();
   };
 
@@ -56,15 +50,15 @@ const SelectCities = ({
         <CitiesTableWrap>
           <table>
             <Tbody>
-              {citiesData.map(country => (
-                <tr key={country.id}>
+              {citiesData.map((country, idx) => (
+                <tr key={idx}>
                   <th>{country.category}</th>
-                  {country.cities.map(city => (
+                  {country.city.map(city => (
                     <td
                       key={city.id}
                       data-city-name={city.name}
                       data-city-code={city.code}
-                      onClick={showCityName}
+                      onClick={e => showCityName(e, city.id)}
                     >
                       {city.name}
                     </td>

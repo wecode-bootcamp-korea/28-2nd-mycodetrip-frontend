@@ -9,15 +9,19 @@ import { GET_SEARCHED_TICKETS_API } from './../../../config/config.js';
 const TOTAL_SLIDES = 1;
 
 const SearchedTickets = () => {
-  const [flightsData, setFlightsData] = useState([]);
+  // const [flightsData, setFlightsData] = useState([]);
+  const user = [{ id: 1 }];
+  localStorage.setItem('recently_seen_flights', JSON.stringify(user));
+  const flightsData = JSON.parse(localStorage.getItem('recently_seen_flights'));
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
 
-  useEffect(() => {
-    fetch(`${GET_SEARCHED_TICKETS_API}`)
-      .then(res => res.json())
-      .then(data => setFlightsData(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${GET_SEARCHEDTICKETS_API}`)
+  //     .then(res => res.json())
+  //     .then(data => setFlightsData(data));
+  // }, []);
 
   const nextBtn = () => {
     if (currentSlide === 0) {

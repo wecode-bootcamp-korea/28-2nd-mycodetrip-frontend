@@ -1,19 +1,40 @@
+import { useState } from 'react';
+
+import useQueryString from '../../../hooks/useQueryString';
+
 import SelectPassenger from './../../Modals/SelectPassenger/SelectPassenger';
-import react, { useState } from 'react';
 import styled from 'styled-components';
 
 import { BsPerson } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
 
-// import { GET_SELECTCITIES_API } from '../../../config/config.js';
-
 const Passengers = () => {
-  const [personCount, setPersonCount] = useState(1);
-  const [checkedSeat, setCheckedSeat] = useState('이코노미');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { searchParams, reflectUserSelectQueries } = useQueryString();
+
+  // const [checkedSeat, setCheckedSeat] = useState('이코노미'); // 좌석
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈
 
   const openPassengerModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  let adult = searchParams.get('adult') * 1;
+
+  const calcPerson = e => {
+    const { name } = e.target;
+    adult = name === 'plus' ? adult + 1 : adult - 1;
+    reflectUserSelectQueries({
+      adult,
+    });
+  };
+
+  let seat_type = searchParams.get('seat_type');
+
+  const showSeat = e => {
+    const { name } = e.target.dataset;
+    reflectUserSelectQueries({
+      seat_type: name,
+    });
   };
 
   return (
@@ -22,14 +43,16 @@ const Passengers = () => {
       <PassengersWrap>
         <BsPerson />
         <PassengerSeat onClick={openPassengerModal}>
-          승객 {personCount}명, {checkedSeat}석
+          승객 {adult}명, {seat_type}석
         </PassengerSeat>
         <IoIosArrowDown />
         {isModalOpen && (
           <SelectPassenger
-            personCount={personCount}
-            setPersonCount={setPersonCount}
-            setCheckedSeat={setCheckedSeat}
+            adult={adult}
+            calcPerson={calcPerson}
+            showSeat={showSeat}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
           />
         )}
 

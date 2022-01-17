@@ -3,24 +3,21 @@ import styled from 'styled-components';
 import { FiX } from 'react-icons/fi';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
-const SelectPassenger = ({ personCount, setPersonCount, setCheckedSeat }) => {
-  const calcPerson = e => {
-    const { name } = e.target;
-
-    name === 'minus'
-      ? setPersonCount(personCount > 1 ? personCount - 1 : 1)
-      : setPersonCount(personCount + 1);
-  };
-
-  const showSeat = e => {
-    const { name } = e.target.dataset;
-    setCheckedSeat(name);
-  };
-
+const SelectPassenger = ({
+  isModalOpen,
+  setIsModalOpen,
+  calcPerson,
+  adult,
+  showSeat,
+}) => {
   return (
     <ModalWrap>
       <TopSection>
-        <CloseBtn>
+        <CloseBtn
+          onClick={() => {
+            setIsModalOpen(!isModalOpen);
+          }}
+        >
           <FiX />
         </CloseBtn>
         <Title>인원 & 좌석등급</Title>
@@ -36,7 +33,7 @@ const SelectPassenger = ({ personCount, setPersonCount, setCheckedSeat }) => {
               <button type="button" name="minus" onClick={calcPerson}>
                 <AiOutlineMinusCircle />
               </button>
-              <span>{personCount}</span>
+              <span>{adult}</span>
               <button type="button" name="plus" onClick={calcPerson}>
                 <AiOutlinePlusCircle />
               </button>

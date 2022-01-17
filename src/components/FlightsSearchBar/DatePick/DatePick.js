@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import useQueryString from '../../../hooks/useQueryString';
+import { getParsedDate } from '../../../utils/getTime';
 import styled from 'styled-components';
 
 import { MdDateRange } from 'react-icons/md';
@@ -9,8 +11,20 @@ import 'react-datepicker/dist/react-datepicker.css'; // 스타일 맥이기
 import { ko } from 'date-fns/esm/locale';
 
 const DatePick = () => {
+  const { reflectUserSelectQueries } = useQueryString();
+
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+
+  const setDateQueryString = update => {
+    setDateRange(update);
+    const departure_date = getParsedDate(update[0]);
+    const arrival_date = getParsedDate(update[1]);
+    reflectUserSelectQueries({
+      departure_date,
+      arrival_date,
+    });
+  };
 
   return (
     <DateWrap>
@@ -27,9 +41,7 @@ const DatePick = () => {
         placeholderText="가는날 오는날 선택"
         startDate={startDate}
         endDate={endDate}
-        onChange={update => {
-          setDateRange(update);
-        }}
+        onChange={setDateQueryString}
         isClearable={true}
       />
     </DateWrap>
