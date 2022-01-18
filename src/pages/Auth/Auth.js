@@ -1,23 +1,25 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // import { KAKAO_AUTH_URL, CLIENT_ID } from './OAuth';
 // import { API } from '../../config';
+
 function Auth() {
+  const params = useParams();
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
+
+  const isLogin = params.type === 'login';
+
   const loginKakao = () => {
     const { Kakao } = window;
     Kakao.Auth.login({
       success: function (authObj) {
-        console.log(authObj);
-        fetch('http://10.58.6.23:8000/users/authorize', {
+        fetch('http://mycodetrip-api.chanjoo.xyz/users/authorize', {
           method: 'POST',
           headers: { Authorization: authObj.access_token },
         })
           .then(res => res.json())
           .then(data => {
-            console.log(data);
             if (data) {
               localStorage.setItem('token', data.jwt_token);
               navigate('/');
@@ -26,9 +28,12 @@ function Auth() {
       },
     });
   };
+
   const toggleLogin = () => {
-    setIsLogin(prev => !prev);
+    // setIsLogin(prev => !prev);
+    navigate(isLogin ? '/Auth/signup' : '/Auth/login');
   };
+
   return (
     <Container>
       <AuthContainer>
@@ -47,6 +52,7 @@ function Auth() {
           <Socialtext>네이버</Socialtext>
           <Socialtext>이메일</Socialtext>
         </Social>
+
         <YetSignIn>
           {isLogin ? '이미 아이디가 있으신가요?' : '아직 회원이 아니신가요?'}
         </YetSignIn>
@@ -57,20 +63,26 @@ function Auth() {
     </Container>
   );
 }
+
 export default Auth;
+
 const Container = styled.section`
-  padding: 0px;
-  margin: 120px 0px 100px 740px;
+  padding: 150px;
+  display: flex;
+  justify-content: center;
 `;
+
 const AuthContainer = styled.div`
   border: 1px solid #dcdcdc;
   height: 460px;
   width: 450px;
   padding: 60px;
 `;
+
 const TextBox = styled.div`
   line-height: 1.5;
 `;
+
 const Title = styled.h1`
   padding-top: 40px;
   padding-bottom: 5px;
@@ -78,6 +90,7 @@ const Title = styled.h1`
   font-weight: 500;
   text-align: center;
 `;
+
 const SubTitle = styled.p`
   line-height: 1;
   text-align: center;
@@ -86,6 +99,7 @@ const SubTitle = styled.p`
   display: block;
   padding-bottom: 20px;
 `;
+
 const KakaoButton = styled.div`
   display: flex;
   justify-content: center;
@@ -106,20 +120,24 @@ const Social = styled.div`
   font-weight: 500;
   color: #b9bbb6;
 `;
+
 const Socialtext = styled.div`
   margin: 5px 23px;
   color: #a9a9a9;
 `;
+
 const YetSignIn = styled.p`
   line-height: 2.5;
   display: inline;
   color: #a9a9a9;
   padding-left: 42px;
 `;
+
 const BtnText = styled.span`
   margin-top: 4px;
   font-weight: 500;
 `;
+
 const AuthQuest = styled.a`
   color: gray;
   text-decoration: underline;
