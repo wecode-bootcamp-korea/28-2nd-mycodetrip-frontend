@@ -14,12 +14,11 @@ import Footer from './components/Footer/Footer';
 function Router() {
   return (
     <>
-      {/* <Navbar /> */}
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Main />} />
-          {/* <Route path="auth/:" element={<Auth />} />  */}
-          <Route path="/Auth" element={<Auth />} />
+          <Route path="/Auth/:type" element={<Auth />} />
           <Route path="/flightsList" element={<FlightsList />} />
           <Route path="/flightsCheck" element={<FlightsCheck />} />
           <Route path="/reservation" element={<Reservation />} />
