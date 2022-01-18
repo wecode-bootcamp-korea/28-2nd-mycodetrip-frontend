@@ -1,27 +1,50 @@
-import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-// import { Link, useHistory } from 'react-router-dom';
-// import { KAKAO_AUTH_URL } from './OAuth';
+// import { KAKAO_AUTH_URL, CLIENT_ID } from './OAuth';
 // import { API } from '../../config';
 
-// const { Kakao } = window;
-
 function Auth() {
-  const isLogin = localStorage.getItem('token');
+  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
+
+  const loginKakao = () => {
+    const { Kakao } = window;
+
+    Kakao.Auth.login({
+      success: function (authObj) {
+        // console.log(authObj);
+        fetch('http://1f1f-211-106-114-186.ngrok.io/users/authorize', {
+          method: 'POST',
+          headers: { Authorization: authObj.access_token },
+        })
+          .then(res => res.json())
+          .then(data => {
+            // console.log(data);
+            if (data.message) {
+              localStorage.setItem('token', data.token);
+              navigate('/');
+            }
+          });
+      },
+    });
+  };
+
+  const toggleLogin = () => {
+    setIsLogin(prev => !prev);
+  };
 
   return (
     <Container>
       <AuthContainer>
         <img src="/images/logo.png" alt="로고" />
         <TextBox>
-          <Title>{isLogin ? 'Welcome!' : '반갑습니다!'}</Title>
+          <Title>{isLogin ? '반갑습니다!' : 'Welcome!'}</Title>
           <SubTitle>여행의 모든 것, 마이코드트립</SubTitle>
         </TextBox>
-        <KakaoButton
-        // onClick={KakaoLogin}
-        >
+        <KakaoButton onClick={loginKakao}>
           <BtnText>
-            {isLogin ? '카카오로 계속하기' : '카카오로 바로시작'}
+            {isLogin ? '카카오로 바로시작' : '카카오로 계속하기'}
           </BtnText>
         </KakaoButton>
         <Social>
@@ -31,9 +54,11 @@ function Auth() {
         </Social>
 
         <YetSignIn>
-          {isLogin ? '아직 회원이 아니신가요? ' : '이미 아이디가 있으신가요?'}
+          {isLogin ? '이미 아이디가 있으신가요?' : '아직 회원이 아니신가요?'}
         </YetSignIn>
-        <AuthQuest>{isLogin ? '회원가입' : '로그인'}</AuthQuest>
+        <AuthQuest onClick={toggleLogin}>
+          {isLogin ? '로그인' : '회원가입'}
+        </AuthQuest>
       </AuthContainer>
     </Container>
   );
@@ -78,7 +103,7 @@ const KakaoButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 340px;
+  width: 320px;
   height: 60px;
   background-color: rgb(255, 228, 54);
   border-radius: 5px;
