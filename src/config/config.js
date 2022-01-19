@@ -3,7 +3,7 @@ const BASE_URL = 'http://10.58.2.221:8000';
 // 사용되는 API 주소
 export const GET_SEARCHED_TICKETS_API = `${BASE_URL}/data/main/searchedTickets.json`;
 
-export const GET_CHEAP_FLIGHTS_API = `${BASE_URL}/data/main/cheapFlightsData.json`;
+export const GET_CHEAP_FLIGHTS_API = `http://10.58.2.221:8000/flights/main`;
 
 export const GET_SELECT_CITIES_API = `${BASE_URL}/data/flightsSearchBar/flightsSearchBar.json`;
 

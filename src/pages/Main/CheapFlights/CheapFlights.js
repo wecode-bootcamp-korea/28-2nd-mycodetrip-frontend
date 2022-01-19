@@ -2,48 +2,61 @@ import { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
+import { getKORFormattedDate } from './../../../utils/getTime';
+
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { CgAirplane } from 'react-icons/cg';
 
 import { GET_CHEAP_FLIGHTS_API } from './../../../config/config.js';
 
 const CheapFlights = () => {
-  const [cheapFlightData, setCheapFlightData] = useState([]);
+  const [cheapFlightJeju, setCheapFlightJeju] = useState([]);
+  const [cheapFlightParis, setCheapFlightParis] = useState([]);
 
   useEffect(() => {
-    fetch(`${GET_CHEAP_FLIGHTS_API}`)
+    fetch(`${GET_CHEAP_FLIGHTS_API}?city=제주`)
       .then(res => res.json())
-      .then(data => setCheapFlightData(data));
+      .then(data => setCheapFlightJeju(data.result));
   }, []);
 
+  useEffect(() => {
+    fetch(`${GET_CHEAP_FLIGHTS_API}?city=파리`)
+      .then(res => res.json())
+      .then(data => setCheapFlightParis(data.result));
+  }, []);
+
+  const isAllFetched = cheapFlightJeju?.city && cheapFlightParis?.city;
+  if (!isAllFetched) return <h1>Not Found</h1>;
   return (
     <>
-      {cheapFlightData.map((ticket, idx) => (
+      {[cheapFlightJeju, cheapFlightParis].map((ticket, idx) => (
         <Container key={idx}>
           <Title>
-            {Object.keys(ticket).join() === '제주'
+            {ticket.city === '제주'
               ? `제주도 국내 최저가 항공권 🍊`
               : `파리 해외 최저가 항공권 🥖`}
           </Title>
           <FlightsWrap>
-            {ticket[Object.keys(ticket)].map(item => (
+            {ticket.data.map(item => (
               <Ticket key={item.id}>
                 <TicketImg>
-                  <img src={item.ticketImg} alt="ticketImage" />
+                  <img src={item.image} alt="ticketImage" />
                 </TicketImg>
                 <TicketInfo>
                   <h4>
-                    {item.departure} <AiOutlineArrowRight /> {item.arrival}
+                    {item.departure_city} <AiOutlineArrowRight />{' '}
+                    {item.arrival_city}
                   </h4>
                   <TicketDateInfo>
                     <CgAirplane />
-                    {item.departure} <AiOutlineArrowRight /> {item.arrival}
+                    {item.departure_city} <AiOutlineArrowRight />{' '}
+                    {item.arrival_city}
                     <br />
-                    {/* {getParsedTime(item.date_departure)} ~{' '} */}
-                    {/* {getParsedTime(item.date_arrival)} */}
+                    {getKORFormattedDate(item.departure_time)} ~{' '}
+                    {getKORFormattedDate(item.arrival_time)}
                   </TicketDateInfo>
                   <em>{item.price.toLocaleString()} ~</em>
-                  {/* <b>{item.departure_date}월 출발</b> */}
+                  <b>{getKORFormattedDate(item.departure_time)}</b>
                 </TicketInfo>
               </Ticket>
             ))}
