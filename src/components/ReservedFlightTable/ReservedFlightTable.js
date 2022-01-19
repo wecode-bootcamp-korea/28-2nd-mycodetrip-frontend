@@ -6,7 +6,6 @@ import { getKORFormattedDate } from '../../utils/getTime';
 const ReservedFlightTable = ({ reservedFlightInfo }) => {
   return (
     <Container>
-      {console.log(reservedFlightInfo)}
       {reservedFlightInfo?.map((flightInfo, idx) => (
         <div key={idx}>
           <FlightBadge flightInfo={flightInfo} flightType={idx} size="lg">
@@ -40,6 +39,10 @@ const ResveredFlight = styled.div`
   justify-content: space-around;
   padding: 0.5em;
   border-block: 1px solid ${({ theme }) => theme.color.gray_500};
+
+  img {
+    max-width: 4rem;
+  }
 `;
 
 const FlexCol = styled.div`
