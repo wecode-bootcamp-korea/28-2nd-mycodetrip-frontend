@@ -5,23 +5,26 @@ import {
 } from 'react-router-dom';
 
 const BASE_FLIGHT_QUERY = [
-  'departure_date',
-  'arrival_date',
-  'departure_city',
-  'arrival_city',
-  'adult',
-  'infant',
-  'child',
-  'at_time',
-  'airline_list',
-  'seat_type',
-  'maxprice',
-  'sort',
-  'is_round',
-  'departure_flight',
-  'return_flight',
+  'departure_date=',
+  'arrival_date=',
+  'departure_city=서울',
+  'arrival_city=',
+  'departure_city_code=SEL',
+  'arrival_city_code=',
+  'adult=1',
+  'infant=',
+  'child=',
+  'at_time=',
+  'airline_list=',
+  'seat_type=',
+  'maxprice=',
+  'sort=',
+  'is_round=YES',
+  'departure_flight=',
+  'return_flight=',
+  'imgLoading=YES',
 ];
-const INIT_QUERY_STRING = BASE_FLIGHT_QUERY.join('=&');
+const INIT_QUERY_STRING = BASE_FLIGHT_QUERY.join('&');
 
 const useQueryString = () => {
   const [searchParams, setSearchParams] = useSearchParams(INIT_QUERY_STRING);
@@ -99,11 +102,21 @@ const useQueryString = () => {
     navigate(`${pathname}?${searchParams}`);
   }
 
+  function getFilteredParams(userRequestKeys) {
+    const entries = [...searchParams.entries()];
+    const filteredEntries = entries.filter(([reqQueryKey, _]) =>
+      userRequestKeys.includes(reqQueryKey)
+    );
+    const filteredObj = Object.fromEntries(filteredEntries);
+    return filteredObj;
+  }
+
   return {
     searchParams,
     toggleQueryString,
     reflectUserSelectQueries,
     navigateToWithQueryString,
+    getFilteredParams,
   };
 };
 

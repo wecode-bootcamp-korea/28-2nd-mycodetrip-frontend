@@ -4,6 +4,7 @@ import FlightBadge from '../../components/FlightInfoCard/FlightBadge';
 import FlightFilter from './components/FlightFilter';
 import FlightPriceRange from './components/FlightPriceRange';
 import FlightInfoCard from '../../components/FlightInfoCard/FlightInfoCard';
+import FlightLoading from './components/FlightLoading';
 import useFetch from '../../hooks/useFetch';
 import useQueryString from '../../hooks/useQueryString';
 
@@ -13,6 +14,7 @@ const FlightsList = () => {
     reflectUserSelectQueries,
     toggleQueryString,
     navigateToWithQueryString,
+    getFilteredParams,
   } = useQueryString();
 
   const {
@@ -109,8 +111,21 @@ const FlightsList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  if (flightLoading || airlineLoading || seatLoading)
-    return <h1>Loading...</h1>;
+  const isDataYetFetched = flightLoading || airlineLoading || seatLoading;
+  const isImgLoading = searchParams.get('imgLoading') === 'YES';
+
+  const fadeOutImgLoading = () => {
+    reflectUserSelectQueries({ imgLoading: 'NO' });
+  };
+
+  if (isImgLoading)
+    return (
+      <FlightLoading
+        getFilteredParams={getFilteredParams}
+        fadeOutImgLoading={fadeOutImgLoading}
+      />
+    );
+  else if (isDataYetFetched) return <h1>Loading...</h1>;
   else if (flightError || airlineError || seatError) return <h2>Error</h2>;
   return (
     <Container>
@@ -176,12 +191,13 @@ const FlightsList = () => {
 export default FlightsList;
 
 const Container = styled.main`
+  position: relative;
   display: grid;
   grid-template-columns: 18rem auto;
   grid-template-rows: max-content auto;
   gap: 1.5rem;
   min-height: 150vh;
-  padding: 1rem 13vw;
+  padding: 4rem 13vw 1rem;
   background-color: ${({ theme }) => theme.color.gray_100};
   overflow: hidden;
 `;
