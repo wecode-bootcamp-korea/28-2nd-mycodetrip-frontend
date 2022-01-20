@@ -77,7 +77,7 @@ export default function ReservAside({
     body: JSON.stringify({
       customer: bookerInfo,
       passengerInfo: passengerInfoList,
-      total_price: discountedPrice,
+      total_price: totalPrice * adult - 2000,
       number_of_tickets: adult,
       flight_seats_id: [departureFlight, returnFlight],
       payments_method: 'card',
@@ -85,6 +85,7 @@ export default function ReservAside({
   };
 
   const submitPersonalInfo = () => {
+    console.log('눌림');
     fetch(POST_PERSONALINFORMATION_API, {
       method: 'POST',
       ...submitPersonalInfoForm,
