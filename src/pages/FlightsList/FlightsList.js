@@ -118,17 +118,16 @@ const FlightsList = () => {
     reflectUserSelectQueries({ imgLoading: 'NO' });
   };
 
-  if (isImgLoading)
-    return (
-      <FlightLoading
-        getFilteredParams={getFilteredParams}
-        fadeOutImgLoading={fadeOutImgLoading}
-      />
-    );
-  else if (isDataYetFetched) return <h1>Loading...</h1>;
+  if (isDataYetFetched) return <h1>Loading...</h1>;
   else if (flightError || airlineError || seatError) return <h2>Error</h2>;
   return (
     <Container>
+      {isImgLoading && (
+        <FlightLoading
+          getFilteredParams={getFilteredParams}
+          fadeOutImgLoading={fadeOutImgLoading}
+        />
+      )}
       <SelectedFlightBox>
         {selectedFlights.map(
           (flightInfo, idx) =>

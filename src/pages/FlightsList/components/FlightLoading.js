@@ -18,6 +18,7 @@ const FlightLoading = ({ getFilteredParams, fadeOutImgLoading }) => {
 
   return (
     <Container onAnimationEnd={fadeOutImgLoading}>
+      <BlackBox onAnimationEnd={preventAnimationEndBubble} />
       <FlightInfoBox onAnimationEnd={preventAnimationEndBubble}>
         <Title>
           제주에서 여수까지
@@ -70,21 +71,20 @@ const Container = styled.section`
 
   position: absolute;
   inset: 0;
-  height: 100vh;
   z-index: 10;
+  max-height: 100vh;
   overflow: hidden;
   text-align: center;
   color: ${({ theme }) => theme.color.white};
   animation: ${contentFadeOut} forwards;
   animation-delay: var(--component-fadeout-delay);
+`;
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    animation: ${contentFadeOut} forwards;
-  }
+const BlackBox = styled.div`
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  animation: ${contentFadeOut} forwards;
 `;
 
 const FlightInfoBox = styled.div`
