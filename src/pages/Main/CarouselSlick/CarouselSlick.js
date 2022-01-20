@@ -9,29 +9,25 @@ const CarouselSlick = () => {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 2,
-    autoplay: false,
-    autoplaySpeed: 3500,
+    autoplay: true,
+    autoplaySpeed: 2500,
   };
+
+  // const bannerImgs = [
+  //   {
+  //     id:1,
+  //     img:
+  //   },
+  // ];
 
   return (
     <Container>
       <StyledSlider {...sliderSettings}>
-        <img
-          src="https://images.unsplash.com/photo-1638913971789-667874197280?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-          alt=""
-        />
-        <img
-          src="https://images.unsplash.com/photo-1641763770805-f62250258b7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-          alt=""
-        />
-        <img
-          src="https://images.unsplash.com/photo-1641805963238-a8d4717575d6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
-          alt=""
-        />
-        <img
-          src="https://images.unsplash.com/photo-1638913662584-731da41f5a59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-          alt=""
-        />
+        {/* {bannerImgs.map(banner => <img key={banner.id} src={banner.img} alt={} />)} */}
+        <img src="/images/banners/banner_0.png" alt="banner" />
+        <img src="/images/banners/banner_1.png" alt="banner" />
+        <img src="/images/banners/banner_2.png" alt="banner" />
+        <img src="/images/banners/banner_3.png" alt="banner" />
       </StyledSlider>
     </Container>
   );
@@ -41,7 +37,7 @@ export default CarouselSlick;
 
 export const StyledSlider = styled(Slider)`
   height: 128px; //슬라이드 컨테이너 영역
-  /* overflow: hidden; */
+  overflow: hidden;
 
   .slick-list {
     // 부모

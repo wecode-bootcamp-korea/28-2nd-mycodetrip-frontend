@@ -25,14 +25,14 @@ const Passengers = () => {
     });
   };
 
-  let seat_type = searchParams.get('seat_type');
+  // let seat_type = searchParams.get('seat_type');
 
-  const showSeat = e => {
-    const { name } = e.target.dataset;
-    reflectUserSelectQueries({
-      seat_type: name,
-    });
-  };
+  // const showSeat = e => {
+  //   const { name } = e.target.dataset;
+  //   reflectUserSelectQueries({
+  //     seat_type: name,
+  //   });
+  // };
 
   return (
     <>
@@ -40,14 +40,14 @@ const Passengers = () => {
       <PassengersWrap>
         <BsPerson />
         <PassengerSeat onClick={openPassengerModal}>
-          승객 {adult}명, {seat_type}석
+          승객 {adult}명, 이코노미석
         </PassengerSeat>
         <IoIosArrowDown />
         {isModalOpen && (
           <SelectPassenger
             adult={adult}
             calcPerson={calcPerson}
-            showSeat={showSeat}
+            // showSeat={showSeat}
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
           />

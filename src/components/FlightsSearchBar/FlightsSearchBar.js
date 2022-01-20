@@ -19,7 +19,7 @@ const FlightsSearchBar = () => {
       'adult',
     ]);
 
-    const localData = localStorage.getItem('searchedTicket') ?? [];
+    const localData = JSON.parse(localStorage.getItem('searchedTicket')) ?? [];
 
     localData.push(paramsValues);
     localStorage.setItem('searchedTicket', JSON.stringify(localData));

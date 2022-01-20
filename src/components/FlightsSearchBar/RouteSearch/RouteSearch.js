@@ -34,22 +34,22 @@ const RouteSearch = () => {
   const departure_city = searchParams.get('departure_city');
   const arrival_city = searchParams.get('arrival_city');
 
-  const findCityNameByCode = code => {
+  const findCityCodeByName = name => {
     const fetchedCities = citiesData.reduce((acc, countryObj) => {
       for (const cityObj of countryObj.city) {
         acc.push(cityObj);
       }
       return acc;
     }, []);
-    const matchedCityByCode = fetchedCities.filter(city => city.code === code);
-    return matchedCityByCode;
+    const matchedCityBynName = fetchedCities.filter(city => city.name === name);
+    return matchedCityBynName;
   };
 
   const currentRouteObj = (defaultName, defaultCode, cityCodeByParams) => {
-    const matchedCity = findCityNameByCode(cityCodeByParams)[0];
+    const matchedCity = findCityCodeByName(cityCodeByParams)[0];
     return matchedCity
       ? `${matchedCity.name} ${matchedCity.code}`
-      : `${defaultName} ${defaultCode}`;
+      : `${defaultName} ${defaultCode}`.trim();
   };
 
   const currDepartureObj = currentRouteObj('서울', 'SEL', departure_city);

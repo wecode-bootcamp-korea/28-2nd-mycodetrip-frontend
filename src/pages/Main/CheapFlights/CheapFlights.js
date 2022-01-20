@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import useQueryString from '../../../hooks/useQueryString';
+import { getParsedDate } from '../../../utils/getTime';
 
 import styled from 'styled-components';
 
@@ -12,6 +14,19 @@ import { GET_CHEAP_FLIGHTS_API } from './../../../config/config.js';
 const CheapFlights = () => {
   const [cheapFlightJeju, setCheapFlightJeju] = useState([]);
   const [cheapFlightParis, setCheapFlightParis] = useState([]);
+  const { navigateToWithQueryString, searchParams } = useQueryString();
+  const navigate = cardItem => {
+    const usersUpdateQueries = {
+      arrival_city: cardItem.arrival_city,
+      arrival_date: getParsedDate(cardItem.arrival_time),
+      departure_city: cardItem.departure_city,
+      departure_date: getParsedDate(cardItem.departure_time),
+    };
+    Object.entries(usersUpdateQueries).map(([queryKey, queryValue]) =>
+      searchParams.set(queryKey, queryValue)
+    );
+    navigateToWithQueryString('/flightsList');
+  };
 
   useEffect(() => {
     fetch(`${GET_CHEAP_FLIGHTS_API}?city=제주`)
@@ -38,7 +53,7 @@ const CheapFlights = () => {
           </Title>
           <FlightsWrap>
             {ticket.data.map(item => (
-              <Ticket key={item.id}>
+              <Ticket key={item.id} onClick={() => navigate(item)}>
                 <TicketImg>
                   <img src={item.image} alt="ticketImage" />
                 </TicketImg>
