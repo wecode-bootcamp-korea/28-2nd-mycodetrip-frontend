@@ -150,15 +150,13 @@ const Passenger = styled.dl`
     margin-top: 16px;
   }
 
-  dt {
-    span {
-      display: block;
-      margin-top: 4px;
-      font-size: 12px;
-      color: #adb5bd;
-      font-weight: normal;
-      line-height: 14px;
-    }
+  dt span {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #adb5bd;
+    font-weight: normal;
+    line-height: 14px;
   }
 `;
 

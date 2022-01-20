@@ -58,7 +58,7 @@ const SelectCities = ({
                       key={city.id}
                       data-city-name={city.name}
                       data-city-code={city.code}
-                      onClick={e => showCityName(e, city.id)}
+                      onClick={showCityName}
                     >
                       {city.name}
                     </td>

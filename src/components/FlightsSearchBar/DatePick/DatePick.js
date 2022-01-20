@@ -2,12 +2,13 @@ import { useState } from 'react';
 
 import useQueryString from '../../../hooks/useQueryString';
 import { getParsedDate } from '../../../utils/getTime';
+
 import styled from 'styled-components';
 
 import { MdDateRange } from 'react-icons/md';
 
-import DatePicker from 'react-datepicker'; // DatePicker 라는 컴포넌트도 가져오깅
-import 'react-datepicker/dist/react-datepicker.css'; // 스타일 맥이기
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
 
 const DatePick = () => {
@@ -16,13 +17,13 @@ const DatePick = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 
-  const setDateQueryString = update => {
-    setDateRange(update);
-    const departure_date = getParsedDate(update[0]);
-    const arrival_date = getParsedDate(update[1]);
+  const setDateQueryString = selectedDates => {
+    setDateRange(selectedDates);
+
+    const [departure_date, arrival_date] = selectedDates;
     reflectUserSelectQueries({
-      departure_date,
-      arrival_date,
+      departure_date: getParsedDate(departure_date),
+      arrival_date: getParsedDate(arrival_date),
     });
   };
 
