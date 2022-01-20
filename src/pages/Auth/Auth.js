@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // import { KAKAO_AUTH_URL, CLIENT_ID } from './OAuth';
 // import { API } from '../../config';
-
 function Auth() {
   const params = useParams();
   const navigate = useNavigate();
@@ -28,12 +27,10 @@ function Auth() {
       },
     });
   };
-
   const toggleLogin = () => {
     // setIsLogin(prev => !prev);
     navigate(isLogin ? '/Auth/signup' : '/Auth/login');
   };
-
   return (
     <Container>
       <AuthContainer>

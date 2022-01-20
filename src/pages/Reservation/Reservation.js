@@ -62,6 +62,7 @@ export default function Reservation() {
         adult={adult}
         departureFlight={departureFlight}
         returnFlight={returnFlight}
+        ticketInfo={ticketInfo}
       />
       <BookerInfo bookerInfo={bookerInfo} setBookerInfo={setBookerInfo} />
       <PassengerInfos
@@ -82,6 +83,7 @@ const Container = styled.main`
   grid-gap: 30px;
   padding: 30px 80px;
   padding-left: 200px;
+  margin-top: 50px;
   margin-bottom: 450;
 `;
 
