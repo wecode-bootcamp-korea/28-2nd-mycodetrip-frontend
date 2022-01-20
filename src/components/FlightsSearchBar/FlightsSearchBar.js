@@ -7,18 +7,11 @@ import styled from 'styled-components';
 import DatePick from './DatePick/DatePick';
 
 const FlightsSearchBar = () => {
-  const { searchParams, navigateToWithQueryString } = useQueryString();
-
-  function getDestructuredParamsByKeys(keys) {
-    return keys.reduce((acc, queryKey) => {
-      acc[queryKey] = searchParams.get(queryKey);
-      return acc;
-    }, {});
-  }
+  const { getFilteredParams, navigateToWithQueryString } = useQueryString();
 
   const addSearchedData = () => {
     // 로컬스토리지에 저장
-    const paramsValues = getDestructuredParamsByKeys([
+    const paramsValues = getFilteredParams([
       'departure_city',
       'arrival_city',
       'departure_date',
@@ -26,8 +19,7 @@ const FlightsSearchBar = () => {
       'adult',
     ]);
 
-    let localData = localStorage.getItem('searchedTicket');
-    if (localData == null) localData = [];
+    const localData = localStorage.getItem('searchedTicket') ?? [];
 
     localData.push(paramsValues);
     localStorage.setItem('searchedTicket', JSON.stringify(localData));

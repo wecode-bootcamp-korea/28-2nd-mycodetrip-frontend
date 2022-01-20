@@ -1,27 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 
+import { getParsedDate } from '../../../utils/getTime';
+
 import styled from 'styled-components';
 import { ImLoop } from 'react-icons/im';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-import { GET_SEARCHED_TICKETS_API } from './../../../config/config.js';
-
 const TOTAL_SLIDES = 1;
 
 const SearchedTickets = () => {
-  // const [flightsData, setFlightsData] = useState([]);
-  const user = [{ id: 1 }];
-  localStorage.setItem('recently_seen_flights', JSON.stringify(user));
-  const flightsData = JSON.parse(localStorage.getItem('recently_seen_flights'));
+  const flightsData = JSON.parse(localStorage.getItem('searchedTicket'));
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
-
-  // useEffect(() => {
-  //   fetch(`${GET_SEARCHEDTICKETS_API}`)
-  //     .then(res => res.json())
-  //     .then(data => setFlightsData(data));
-  // }, []);
 
   const nextBtn = () => {
     if (currentSlide === 0) {
@@ -39,40 +30,38 @@ const SearchedTickets = () => {
     }
   };
 
-  // const hideArrows = e => {
-  //   if (flightTickets.length <= 3) {
-  //     // 화살표 다 숨김
-  //     e.style.display = 'none';
-  //   }
-  // };
-
   useEffect(() => {
-    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
+    slideRef.current &&
+      (slideRef.current.style.transform = `translateX(-${currentSlide}00%)`);
   }, [currentSlide]);
 
   // max 6개인 캐러셀, 컨텐츠가 하나 더 추가된다면 배열의 첫번째 요소를 제거
 
-  return (
+  return flightsData ? (
     <Container>
       <Title>최근 검색한 항공권</Title>
       <CarouselFlightsWrap>
         <CarouselFlights ref={slideRef}>
-          {flightsData.map(card => {
+          {flightsData.map((card, idx) => {
             return (
-              <TicketItem key={card.id}>
+              <TicketItem key={idx}>
                 <FlightContent>
-                  <label>{card.trip_type}</label>
+                  <label>{card.is_round}</label>
                   <FlightRoute>
-                    <em>{card.departure}</em>
+                    <em>
+                      {card.departure_city} {card.departure_city_code}
+                    </em>
                     <em className="roundTripIcon">
                       <ImLoop />
                     </em>
-                    <em>{card.arrival}</em>
+                    <em>
+                      {card.arrival_city} {card.arrival_city_code}
+                    </em>
                   </FlightRoute>
                   <FlightInfo>
-                    {/* {getParsedTime(card.date_departure)} -{' '} */}
-                    {/* {getParsedTime(card.date_arrival)} · 성인 */}
-                    {card.personnel_count} · {card.seat_type}
+                    {getParsedDate(card.departure_date)} -{' '}
+                    {getParsedDate(card.arrival_date)} · 성인
+                    {card.adult}
                   </FlightInfo>
                 </FlightContent>
               </TicketItem>
@@ -89,6 +78,8 @@ const SearchedTickets = () => {
         </div>
       </Arrows>
     </Container>
+  ) : (
+    <div />
   );
 };
 
