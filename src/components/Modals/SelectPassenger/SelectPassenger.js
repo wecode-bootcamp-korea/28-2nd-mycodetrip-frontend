@@ -8,7 +8,7 @@ const SelectPassenger = ({
   setIsModalOpen,
   calcPerson,
   adult,
-  showSeat,
+  // showSeat,
 }) => {
   return (
     <ModalWrap>
@@ -71,7 +71,7 @@ const SelectPassenger = ({
           </Passenger>
         </Passengers>
         <Seats>
-          <SeatLabel onClick={showSeat} data-name="이코노미">
+          <SeatLabel data-name="이코노미">
             <input
               type="radio"
               name="seat"
@@ -80,11 +80,11 @@ const SelectPassenger = ({
             />
             이코노미
           </SeatLabel>
-          <SeatLabel onClick={showSeat} data-name="비즈니스">
+          <SeatLabel data-name="비즈니스">
             <input type="radio" name="seat" data-name="비즈니스" />
             비즈니스
           </SeatLabel>
-          <SeatLabel onClick={showSeat} data-name="일반">
+          <SeatLabel data-name="일반">
             <input type="radio" name="seat" data-name="일반" />
             일반
           </SeatLabel>

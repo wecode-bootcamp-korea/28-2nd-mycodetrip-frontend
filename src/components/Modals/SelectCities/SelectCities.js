@@ -32,8 +32,11 @@ const SelectCities = ({
   }, []);
 
   const showCityName = e => {
-    const { cityCode } = e.target.dataset;
-    reflectUserSelectQueries({ [routeName]: cityCode });
+    const { cityName, cityCode } = e.target.dataset;
+    reflectUserSelectQueries({
+      [routeName]: cityName,
+      [`${routeName}_code`]: cityCode,
+    });
     hideModal();
   };
 

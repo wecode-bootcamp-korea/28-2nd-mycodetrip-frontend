@@ -46,7 +46,7 @@ const SearchedTickets = () => {
             return (
               <TicketItem key={idx}>
                 <FlightContent>
-                  <label>{card.is_round}</label>
+                  <label>왕복</label>
                   <FlightRoute>
                     <em>
                       {card.departure_city} {card.departure_city_code}
