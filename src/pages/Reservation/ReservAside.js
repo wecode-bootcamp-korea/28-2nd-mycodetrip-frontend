@@ -38,7 +38,7 @@ export default function ReservAside({
     }
   };
 
-  const discountedPrice = totalPrice * adult - 2000;
+  const discountedPrice = (totalPrice * adult - 2000).toLocaleString();
 
   const handleAllCheckbox = e => {
     const { checked } = e.target;
@@ -85,7 +85,6 @@ export default function ReservAside({
   };
 
   const submitPersonalInfo = () => {
-    console.log('눌림');
     fetch(POST_PERSONALINFORMATION_API, {
       method: 'POST',
       ...submitPersonalInfoForm,
@@ -98,6 +97,7 @@ export default function ReservAside({
           );
         }
       });
+    // .catch(err => console.log('err with', err, ''));
   };
 
   return (
@@ -108,11 +108,11 @@ export default function ReservAside({
           <FatHr />
           <Row>
             <span>주문 금액</span>
-            <span>{totalPrice * adult}원</span>
+            <span>{(totalPrice * adult).toLocaleString()}원</span>
           </Row>
           <Row>
             <span>발권 수수료 면제</span>
-            <span>-2000원</span>
+            <span>-2,000원</span>
           </Row>
           <br />
           <TotalPrice>

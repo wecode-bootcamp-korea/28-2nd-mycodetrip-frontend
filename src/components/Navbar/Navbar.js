@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-
+import useQueryString from '../../hooks/useQueryString';
 function Navbar() {
+  const { searchParams } = useQueryString();
   const navigate = useNavigate();
   const TOKEN = localStorage.getItem('token');
   const logoutBtn = () => {
@@ -21,7 +22,7 @@ function Navbar() {
         {TOKEN ? (
           <RSide>
             <MyList to="/">위시리스트</MyList>
-            <MyList to="/mypage">내여행</MyList>
+            <MyList to={`/mypage?${searchParams}`}>내여행</MyList>
             <MyList to="/">메세지</MyList>
             <MyList to="/">알림</MyList>
             <Logout onClick={logoutBtn}>로그아웃</Logout>
@@ -40,14 +41,15 @@ function Navbar() {
 export default Navbar;
 
 const Wrapper = styled.div`
+  position: fixed;
+  top: 0px;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: fixed;
-  top: 0px;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.85);
   padding: 10px 0;
 `;
 
@@ -107,6 +109,7 @@ const BtnIn = styled(Link)`
 //     border-radius: 3px;
 //   }
 // `;
+
 const Logout = styled.div`
   cursor: pointer;
   color: white;

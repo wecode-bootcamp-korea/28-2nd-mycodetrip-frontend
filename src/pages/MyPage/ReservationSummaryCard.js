@@ -2,28 +2,28 @@ import styled, { css } from 'styled-components';
 import { IoIosArrowForward } from 'react-icons/io';
 import { getKORFormattedDate } from '../../utils/getTime';
 
-const ReservationSummaryCard = ({
-  reservedFlight,
-  reservation_number,
-  showDetailFlightTicket,
-}) => {
+const ReservationSummaryCard = ({ reservedFlight, showDetailFlightTicket }) => {
   return (
     <Container>
       <Typography align="left">
-        {getKORFormattedDate(reservedFlight.travel_date, true)}
+        {getKORFormattedDate(reservedFlight.flights[0].travel_date, true)}
       </Typography>
       <Box>
-        <img src={reservedFlight.logo} alt="flight logos" />
+        <img
+          src={`http://mycodetrip-api.chanjoo.xyz${reservedFlight.flights[0].logo}`}
+          alt="flight logos"
+        />
         <Typography color="primary" pointer onClick={showDetailFlightTicket}>
           예약 상세 보기 <IoIosArrowForward />
         </Typography>
         <Flex>
-          <SubTitle>[{reservedFlight.title[0]}]</SubTitle>
+          <SubTitle>[{reservedFlight.flights[0].airline}]</SubTitle>
           <p>
-            {reservedFlight.title[1]}-{reservedFlight.title[2]}
+            {reservedFlight.flights[0].departure}-
+            {reservedFlight.flights[0].arrival}
           </p>
         </Flex>
-        <Typography>예약번호 {reservation_number}</Typography>
+        <Typography>예약번호 {reservedFlight.reservation_number}</Typography>
       </Box>
     </Container>
   );

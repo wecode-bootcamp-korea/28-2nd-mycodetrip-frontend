@@ -31,7 +31,9 @@ const FlightFilter = props => {
                 type="checkbox"
                 name={name}
                 checked={checkCurrIDIncluded(`${id}`)}
-                onChange={e => toggleQueryString(data, type, id)}
+                onChange={() => {
+                  toggleQueryString(data, type, id);
+                }}
               />
               <BsCheckLg />
               <Label htmlFor={`title${name}`}>{name}</Label>

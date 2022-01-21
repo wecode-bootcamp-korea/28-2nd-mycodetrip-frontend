@@ -69,9 +69,10 @@ const Container = styled.section`
   --content-fadeout-delay: 3s;
   --component-fadeout-delay: 7s;
 
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 10;
+  min-height: 100vh;
   max-height: 100vh;
   overflow: hidden;
   text-align: center;

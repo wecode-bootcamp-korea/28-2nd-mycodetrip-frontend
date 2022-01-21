@@ -15,7 +15,10 @@ const FlightInfoCard = ({
     <Container selected={selected}>
       {children}
       <FlightLogo>
-        <FlightLogoImg src={flightInfo.logo} alt={flightInfo.logo} />
+        <FlightLogoImg
+          src={`http://mycodetrip-api.chanjoo.xyz${flightInfo.logo}`}
+          alt="logo"
+        />
         <FlexCol>
           <h2>{flightInfo.airline}</h2>
           <h3>{flightInfo.aircraft}</h3>
@@ -23,9 +26,11 @@ const FlightInfoCard = ({
       </FlightLogo>
 
       <FlightTimeInfo flightInfo={flightInfo} />
-      <Typography>{flightInfo.isDiscount ? '할인석' : '일반석'}</Typography>
-      <Typography>{flightInfo.tickets}석</Typography>
-      <FlightPriceInfo>{flightInfo.price.toLocaleString()}원</FlightPriceInfo>
+      <Typography>일반석</Typography>
+      <Typography>{flightInfo.seat_type}석</Typography>
+      <FlightPriceInfo>
+        {parseInt(flightInfo.price).toLocaleString()}원
+      </FlightPriceInfo>
       {flightInfo.baggage ? (
         `무료 수하물 ${flightInfo.baggage ?? 15}kg`
       ) : (
