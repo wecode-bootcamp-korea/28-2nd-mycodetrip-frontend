@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ReservedFlightTable from '../../components/ReservedFlightTable/ReservedFlightTable';
 import useFetch from '../../hooks/useFetch';
+import useQueryString from '../../hooks/useQueryString';
 import ReservationSummaryCard from './ReservationSummaryCard';
 const RESERVED_FLIGHT = '에약한 항공권';
 const DETAIL_FLIGHT = '자세히 보기';
@@ -10,21 +11,24 @@ const VIEWLIST = [RESERVED_FLIGHT, DETAIL_FLIGHT, CANCELED_FLIGHT];
 
 const Mypage = () => {
   const [currView, setCurrView] = useState(0);
+  const { searchParams } = useQueryString();
   const {
     data: reservedFlightInfo,
     isLoading,
     error,
     fetchData,
-  } = useFetch('./data/myPage/reservedUserInfo.json');
+  } = useFetch(`http://mycodetrip-api.chanjoo.xyz/users/orders`);
 
   const showDetailFlightTicket = () => {
     setCurrView(1);
-    fetchData('./data/myPage/reservedFlight.json');
+    fetchData(
+      `http://mycodetrip-api.chanjoo.xyz/flights/detail?${searchParams.toString()}`
+    );
   };
 
   const fetchReservedFlight = () => {
     setCurrView(0);
-    fetchData('./data/myPage/reservedUserInfo.json');
+    fetchData('http://mycodetrip-api.chanjoo.xyz/users/orders');
   };
 
   const handleSideBarShow = clicked => {
@@ -34,14 +38,14 @@ const Mypage = () => {
 
   const getTotalFlightPrice = () => {
     const fetchedDataType = reservedFlightInfo?.type;
-    if (fetchedDataType === 'reservedFlight')
+    if (fetchedDataType === 'selected_flights')
       return reservedFlightInfo?.data
-        .reduce((acc, { price }) => acc + price, 0)
+        .reduce((acc, { price }) => acc + price * 1, 0)
         .toLocaleString();
   };
   const totalFlightPrice = getTotalFlightPrice();
 
-  if (isLoading || !reservedFlightInfo.type) return <h1>Loading...</h1>;
+  if (isLoading || !reservedFlightInfo?.type) return <h1>Loading...</h1>;
   else if (error) return <h2>Error..</h2>;
   return (
     <Container>
@@ -63,15 +67,15 @@ const Mypage = () => {
         </SidebarList>
       </SidebarMenu>
       <Box>
-        {reservedFlightInfo.flights?.map(reservedFlight => (
-          <ReservationSummaryCard
-            key={reservedFlight.id}
-            reservedFlight={reservedFlight}
-            reservation_number={reservedFlightInfo?.reservation_number}
-            showDetailFlightTicket={showDetailFlightTicket}
-          />
-        ))}
-        {reservedFlightInfo.type === 'reservedFlight' && (
+        {reservedFlightInfo.type === 'order_list' &&
+          reservedFlightInfo?.data.map(reservedFlight => (
+            <ReservationSummaryCard
+              key={reservedFlight.id}
+              reservedFlight={reservedFlight}
+              showDetailFlightTicket={showDetailFlightTicket}
+            />
+          ))}
+        {reservedFlightInfo.type === 'selected_flights' && (
           <>
             <ReservedFlightTable
               reservedFlightInfo={reservedFlightInfo?.data}
@@ -94,7 +98,7 @@ const Container = styled.section`
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 1em;
-  padding: 3rem 10vw;
+  padding: 10rem 10vw 15em;
   min-height: 80vh;
 `;
 
@@ -156,7 +160,7 @@ const Box = styled.section`
 const Flex = styled.div`
   ${({ theme }) => theme.flex};
   justify-content: space-between;
-  padding: 0 1.5em;
+  padding: 2em 1.5em;
   font-size: 1.25rem;
   font-weight: bold;
 `;

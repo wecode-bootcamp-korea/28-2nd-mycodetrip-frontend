@@ -6,7 +6,11 @@ const useFetch = url => {
   const [data, setData] = useState([]);
 
   const fetchData = (fetchUrl = url) => {
-    fetch(fetchUrl)
+    fetch(fetchUrl, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    })
       .then(res => res.json())
       .then(fetchedData => {
         setIsLoading(true);
@@ -19,6 +23,7 @@ const useFetch = url => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // return () => setIsLoading(false);
   }, []);
 
   return { data, isLoading, error, fetchData };

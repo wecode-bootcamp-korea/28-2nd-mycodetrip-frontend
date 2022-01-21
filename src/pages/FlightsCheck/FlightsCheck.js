@@ -15,22 +15,26 @@ const FlightsCheck = () => {
     data: detailFlightsInfo,
     isLoading: detailFlightsLoading,
     error: detailFlightsError,
-  } = useFetch('./data/flights/flightDetail.json');
+    // } = useFetch('./data/flights/flightDetail.json');
+  } = useFetch(
+    `http://mycodetrip-api.chanjoo.xyz/flights/detail?${searchParams.toString()}`
+  );
 
   const isFirstRender = !detailFlightsInfo?.length;
   const departureFlightID = searchParams.get('departure_flight');
 
-  const flightPricePerPersonByPersonnelType = detailFlightsInfo?.reduce(
-    (acc, flight) => acc + flight.price,
+  const filterPersonnalPrice = detailFlightsInfo?.data?.reduce(
+    (acc, flight) => acc + parseInt(flight.price),
     0
   );
+
   const selectedFlightsDataSet = PASSENGER_TYPE.reduce((acc, queryKey) => {
     const personnel = searchParams.get(queryKey);
     const obj = {
       type: queryKey.toUpperCase(),
-      price: flightPricePerPersonByPersonnelType,
+      price: filterPersonnalPrice,
       personnel,
-      totalPrice: flightPricePerPersonByPersonnelType * personnel,
+      totalPrice: filterPersonnalPrice * personnel,
     };
     if (personnel) acc.push(obj);
     return acc;
@@ -61,7 +65,7 @@ const FlightsCheck = () => {
   else if (detailFlightsLoading) return <h1>Loading...</h1>;
   return (
     <Container>
-      {detailFlightsInfo?.map(
+      {detailFlightsInfo?.data?.map(
         (flightInfo, idx) =>
           flightInfo?.id && (
             <FlightInfoCard
@@ -90,7 +94,7 @@ const FlightsCheck = () => {
             ({ type, price, personnel, totalPrice }) => (
               <TableRow key={type}>
                 <td>{type}</td>
-                <td>{`${price.toLocaleString()}원`}</td>
+                <td>{`${price?.toLocaleString()}원`}</td>
                 <td>{personnel}</td>
                 <td>{`${totalPrice.toLocaleString()}원`}</td>
               </TableRow>
@@ -114,7 +118,7 @@ export default FlightsCheck;
 
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.gray_50};
-  padding: 1em 13vw;
+  padding: 7em 13vw;
 `;
 
 const DetailFeeTable = styled.table`

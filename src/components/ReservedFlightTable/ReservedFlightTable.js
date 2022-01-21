@@ -3,7 +3,7 @@ import FlightBadge from '../FlightInfoCard/FlightBadge';
 import FlightTimeInfo from '../FlightInfoCard/FlightTimeInfo';
 import { getKORFormattedDate } from '../../utils/getTime';
 
-const ReservedFlightTable = ({ reservedFlightInfo, adult }) => {
+const ReservedFlightTable = ({ reservedFlightInfo }) => {
   return (
     <Container>
       {reservedFlightInfo?.map((flightInfo, idx) => (
@@ -12,14 +12,17 @@ const ReservedFlightTable = ({ reservedFlightInfo, adult }) => {
             <p>{getKORFormattedDate(flightInfo.departure.time)}</p>
           </FlightBadge>
           <ResveredFlight>
-            <img src={flightInfo.logo} alt="airline logo" />
+            <img
+              src={`http://mycodetrip-api.chanjoo.xyz${flightInfo.logo}`}
+              alt="airline logo"
+            />
             <FlexCol>
               <p>{flightInfo.airline}</p>
               <p>{flightInfo.aircraft}</p>
             </FlexCol>
             <FlightTimeInfo flightInfo={flightInfo} />
             <FlexCol>
-              <p>성인 {adult}명</p>
+              {/* <p>성인 {adult}명</p> */}
               <p>{flightInfo.seat_type}</p>
             </FlexCol>
             <Typograpy>무료 수하물 {flightInfo?.baggage ?? 15}KG</Typograpy>

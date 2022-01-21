@@ -12,9 +12,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
 
 const DatePick = () => {
-  const { reflectUserSelectQueries } = useQueryString();
+  const { searchParams, reflectUserSelectQueries } = useQueryString();
+  const initStartDate = searchParams.get('departure_date')
+    ? new Date(searchParams.get('departure_date'))
+    : null;
+  const initEndDate = searchParams.get('arrival_date')
+    ? new Date(searchParams.get('arrival_date'))
+    : null;
 
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState([initStartDate, initEndDate]);
   const [startDate, endDate] = dateRange;
 
   const setDateQueryString = selectedDates => {

@@ -4,6 +4,7 @@ import ReservAside from './ReservAside';
 import ReservedTicketInfo from './ReservedTicketInfo';
 import BookerInfo from './BookerInfo';
 import PassengerInfos from './PassengerInfos';
+import useQueryString from '../../hooks/useQueryString';
 
 const PASSENGER_INFO_FORM = {
   nationality: 'KOR',
@@ -12,13 +13,12 @@ const PASSENGER_INFO_FORM = {
   birthday: '',
   sex: '',
 };
-const string = window.location.search;
-const searchParams = new URLSearchParams(string);
-const adult = Number(searchParams.get('adult'));
-const departureFlight = searchParams.get('departure_flight');
-const returnFlight = searchParams.get('return_flight');
 
 export default function Reservation() {
+  const { searchParams } = useQueryString();
+  const adult = Number(searchParams.get('adult'));
+  const departureFlight = searchParams.get('departure_flight');
+  const returnFlight = searchParams.get('return_flight');
   const [bookerInfo, setBookerInfo] = useState({
     name: '',
     email: '',
@@ -35,7 +35,7 @@ export default function Reservation() {
       `http://mycodetrip-api.chanjoo.xyz/flights/detail?departure_flight=${departureFlight}&return_flight=${returnFlight}`
     )
       .then(res => res.json())
-      .then(result => setTicketInfo(result.result.date));
+      .then(result => setTicketInfo(result.result.data));
   }, []);
 
   useEffect(() => {
