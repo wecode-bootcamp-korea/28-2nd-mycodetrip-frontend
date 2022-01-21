@@ -1,35 +1,42 @@
-# MyCodeTrip Team Project
+#  MyCodeTrip Team Project
 
-## :: 팀원
+ - 여행을 준비하며 실제로 서비스를 이용하며 겪은  좋은 경험을 토대로, 대한민국 NO.1 여행 플랫폼 <마이 리얼 트립>의 클론 프로젝트를  진행하게 되었습니다.
+ - 2주간의 클로닝 프로젝트이기 때문에 선택과 집중을 하여 항공권 기능만 구현하였습니다.
+ - 개발은 초기 세팅부터 전부 직접 구현하였으며, 데모 영상에서 보이는 부분은 모두 백엔드와 연결하여 실제 사용할 수 있는 서비스 수준으로 개발한 것입니다.
 
-- Frontend - 강희원, 김선주, 박준영, 성윤경
-- Backend - 이민석, 이찬주
-- Backend Link: https://github.com/wecode-bootcamp-korea/28-2nd-mycodetrip-backend.git
+## 개발 인원 및 기간
+- 2022/1/10~ 2022/1/21 
+-   Frontend - 강희원, 김선주, 박준영, 성윤경
+-   Backend - 이민석, 이찬주
+-   Backend Link:  [https://github.com/wecode-bootcamp-korea/28-2nd-mycodetrip-backend.git](https://github.com/wecode-bootcamp-korea/28-2nd-mycodetrip-backend.git)
 
-## :: Project 소개
+## 적용 기술
 
-### Languages and Tools
+**_Front-end_**  [![React](https://camo.githubusercontent.com/ab4c3c731a174a63df861f7b118d6c8a6c52040a021a552628db877bd518fe84/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72656163742d2532333230323332612e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374266c6f676f436f6c6f723d253233363144414642)](https://camo.githubusercontent.com/ab4c3c731a174a63df861f7b118d6c8a6c52040a021a552628db877bd518fe84/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72656163742d2532333230323332612e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374266c6f676f436f6c6f723d253233363144414642)  [![React Router](https://camo.githubusercontent.com/4f9d20f3a284d2f6634282f61f82a62e99ee9906537dc9859decfdc9efbb51ec/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163745f526f757465722d4341343234353f7374796c653d666f722d7468652d6261646765266c6f676f3d72656163742d726f75746572266c6f676f436f6c6f723d7768697465)](https://camo.githubusercontent.com/4f9d20f3a284d2f6634282f61f82a62e99ee9906537dc9859decfdc9efbb51ec/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163745f526f757465722d4341343234353f7374796c653d666f722d7468652d6261646765266c6f676f3d72656163742d726f75746572266c6f676f436f6c6f723d7768697465)  [![Styled Components](https://camo.githubusercontent.com/41326de293d3848e2ab0f29bf1680427128757fe6b586ceddf1097cb4eeb5ff7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7374796c65642d2d636f6d706f6e656e74732d4442373039333f7374796c653d666f722d7468652d6261646765266c6f676f3d7374796c65642d636f6d706f6e656e7473266c6f676f436f6c6f723d7768697465)](https://camo.githubusercontent.com/41326de293d3848e2ab0f29bf1680427128757fe6b586ceddf1097cb4eeb5ff7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7374796c65642d2d636f6d706f6e656e74732d4442373039333f7374796c653d666f722d7468652d6261646765266c6f676f3d7374796c65642d636f6d706f6e656e7473266c6f676f436f6c6f723d7768697465)
 
-**_Front-end_**
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
-![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+**_Back-end_**  [![Python](https://camo.githubusercontent.com/a1b2dac5667822ee0d98ae6d799da61987fd1658dfeb4d2ca6e3c99b1535ebd8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f707974686f6e2d3336373041303f7374796c653d666f722d7468652d6261646765266c6f676f3d707974686f6e266c6f676f436f6c6f723d666664643534)](https://camo.githubusercontent.com/a1b2dac5667822ee0d98ae6d799da61987fd1658dfeb4d2ca6e3c99b1535ebd8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f707974686f6e2d3336373041303f7374796c653d666f722d7468652d6261646765266c6f676f3d707974686f6e266c6f676f436f6c6f723d666664643534)  [![Django](https://camo.githubusercontent.com/5473e0d3006bb7e662bdf754d830a026ce050be61f1cbbd4689783ae49950b93/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646a616e676f2d2532333039324532302e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d646a616e676f266c6f676f436f6c6f723d7768697465)](https://camo.githubusercontent.com/5473e0d3006bb7e662bdf754d830a026ce050be61f1cbbd4689783ae49950b93/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646a616e676f2d2532333039324532302e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d646a616e676f266c6f676f436f6c6f723d7768697465)  [![MySQL](https://camo.githubusercontent.com/918fce8d50581bd97b7133e677a78ed2cad14f970522f219daaeb6d1c81060e1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6d7973716c2d2532333030662e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d6d7973716c266c6f676f436f6c6f723d7768697465)](https://camo.githubusercontent.com/918fce8d50581bd97b7133e677a78ed2cad14f970522f219daaeb6d1c81060e1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6d7973716c2d2532333030662e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d6d7973716c266c6f676f436f6c6f723d7768697465)
+## 구현사항 
 
-**_Back-end_**
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
-![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-
-## 구현사항
-
-1. Authorization
-2. Main
-3. FlightsList
-4. 항공권 확인 및 금액 확인 페이지
+1. Authorization & Social Login
+	- Kakao 아이디를 통한 회원가입 & 로그인 기능
+3. Main
+	- 출발지, 도착지, 여행기간, 인원 수를 선택한 비행 티켓 선택 기능 
+	- 최근 검색한 항공권 기록 목록 제공
+	- 광고 배너(Carousel)
+	- 추천 여행지 제공
+4. Flight Ticket List
+	- Main에서 명시한 조건에 따른 항공권 목록 조회
+	- 높은 가격 순, 낮은 가격 순, 항공사, 등 필터링 기능 제공
+	- 선택된 항공권 포지션을 가장 위로 올리는 기능
+	- 선택된 항공권 확인 및 금액 확인 페이지 
 5. 예약 페이지
+	- 예약자와 탑승객 정보를 받고, 선택된 항공권 확인
+	- 최종 금액을 반영, 구매 및 약관 동의 확인
+6. 마이 페이지
+	- 결제 버튼을 누른 항공권에 대한 정보를 조회
+7. 공용 컴포넌트 - Global Navigation & Footer
 
 ## styled components 사용법
-
 ```
 import styled from 'styled-components';
 const MainWrapper = styled.div`
@@ -37,18 +44,19 @@ const MainWrapper = styled.div`
   background-color: red;
   color: ${props => props.theme.color.green};
 `;
+
 ```
 
-- 일반적인 태그 대신에 styled.Tag명`으로`내부에 sass 로직으로 스타일 작성
-- sass 문법 이기에 Nesting이 가능하다.
-- Components이기에 props를 받을 수 있으며 ${props => props.color} 또는 ${({color} => color)}와 같이 props를 스타일에 적용시킬 수 있다.
+-   일반적인 태그 대신에 styled.Tag명`으로`내부에 sass 로직으로 스타일 작성
+-   sass 문법 이기에 Nesting이 가능하다.
+-   Components이기에 props를 받을 수 있으며 ${props => props.color} 또는 ${({color} => color)}와 같이 props를 스타일에 적용시킬 수 있다.
 
 ### Theme 객체
 
-- props에는 ThemeProvider로 부터 전달받은 theme객체가 들어있고 내부의 값들은 아래와 같다.
-
-- ${props => props.theme.색상명 또는 flex}로 적용시킬 수 있다.
-- theme.flex의 경우 <Wrapper justify='center' />와 같이 props로 넘겨 주면 justify props가 theme.flex의 props로 들어가 적용이 된다.
+-   props에는 ThemeProvider로 부터 전달받은 theme객체가 들어있고 내부의 값들은 아래와 같다.
+-   ${props => props.theme.색상명 또는 flex}로 적용시킬 수 있다.
+-   theme.flex의 경우 와 같이 props로 넘겨 주면 justify props가 theme.flex의 props로 들어가 적용이 된다.
+    
 
 ```
 export const theme = {
@@ -73,3 +81,9 @@ export const theme = {
   },
 };
 ```
+
+## Reference
+
+-   이 프로젝트는  [마이리얼트립](https://www.myrealtrip.com/)  사이트를 참조하여 학습목적으로 만들었습니다.
+-   실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
+-   이 프로젝트에서 사용하고 있는 사진 대부분은 위코드에서 구매한 것이므로 해당 프로젝트 외부인이 사용할 수 없습니다.
