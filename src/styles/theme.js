@@ -2,9 +2,7 @@ import { css } from 'styled-components';
 export const theme = {
   flex: css`
     display: flex;
-    justify-content: ${({ justify }) =>
-      justify ? `${justify}` : 'flex-start'};
-    align-items: ${({ align }) => (align ? `${align}` : 'center')};
+    align-items: center;
   `,
   columnFlex: css`
     display: flex;
