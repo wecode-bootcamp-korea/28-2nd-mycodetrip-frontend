@@ -33,6 +33,10 @@ export default ReservationSummaryCard;
 
 const Container = styled.section`
   text-align: left;
+
+  & + & {
+    margin-top: 1rem;
+  }
 `;
 
 const Box = styled.section`
