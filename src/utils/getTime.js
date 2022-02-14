@@ -42,5 +42,6 @@ export const getParsedDate = isoDate => {
     .toLocaleDateString()
     .split('.')
     .map(date => date.trim());
-  return `${year}-${month}-${date}`;
+
+  return `${year}-${month < 10 ? `0${month}` : month}-${date}`;
 };

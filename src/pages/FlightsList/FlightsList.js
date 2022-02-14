@@ -12,9 +12,9 @@ import useQueryString from '../../hooks/useQueryString';
 const FlightsList = () => {
   const {
     searchParams,
-    reflectUserSelectQueries,
+    updateParams,
     toggleQueryString,
-    navigateToWithQueryString,
+    navigateWithQS,
     getFilteredParams,
   } = useQueryString();
 
@@ -83,8 +83,8 @@ const FlightsList = () => {
   const selectThisFlight = selectedFlightID => {
     const isLastFlightSelect = isRoundTrip === 'YES' && departureFlightID;
     isLastFlightSelect
-      ? reflectUserSelectQueries({ return_flight: selectedFlightID })
-      : reflectUserSelectQueries({ departure_flight: selectedFlightID });
+      ? updateParams({ return_flight: selectedFlightID })
+      : updateParams({ departure_flight: selectedFlightID });
   };
 
   // 항공권 변경 버튼 클릭시 SearchParams update
@@ -92,21 +92,21 @@ const FlightsList = () => {
     // eslint-disable-next-line no-const-assign
     const isFlightReselected = departureFlightID === `${selectedFlightID}`;
     isFlightReselected
-      ? reflectUserSelectQueries({ departure_flight: '', return_flight: '' })
-      : reflectUserSelectQueries({ return_flight: '' });
+      ? updateParams({ departure_flight: '', return_flight: '' })
+      : updateParams({ return_flight: '' });
   };
 
   // 가격에 대한 필터 옵션
   const maxpriceValue = searchParams.get('maxprice');
   const priceRate = maxpriceValue ? maxpriceValue / flightInfos?.maxprice : 1;
   const updateMaxPrice = userAdjustedPrice => {
-    reflectUserSelectQueries({ maxprice: userAdjustedPrice });
+    updateParams({ maxprice: userAdjustedPrice });
   };
 
   useEffect(() => {
     if (isFirstRender) return;
     checkAllFlightsSelected()
-      ? navigateToWithQueryString('/flightsCheck')
+      ? navigateWithQS('/flightsCheck')
       : // : fetchFlight('./data/flights/flightData.json');
         fetchFlight(
           `http://mycodetrip-api.chanjoo.xyz/flights?${searchParams.toString()}`
@@ -123,7 +123,7 @@ const FlightsList = () => {
   const isImgLoading = searchParams.get('imgLoading') === 'YES';
 
   const fadeOutImgLoading = () => {
-    reflectUserSelectQueries({ imgLoading: 'NO' });
+    updateParams({ imgLoading: 'NO' });
   };
 
   if (isDataYetFetched) return <Loading>Loading...</Loading>;
@@ -178,11 +178,7 @@ const FlightsList = () => {
                   성인 1인 기준 편도 요금입니다.(세금 및 수수료 포함)
                 </SubTitle>
               </FlexCol>
-              <Select
-                onChange={e =>
-                  reflectUserSelectQueries({ sort: e.target.value })
-                }
-              >
+              <Select onChange={e => updateParams({ sort: e.target.value })}>
                 <option value="가격 낮은순">가격 낮은순</option>
                 <option value="가격 높은순">가격 높은순</option>
                 <option value="출발 시간 느린 순">출발 시간 늦은 순</option>

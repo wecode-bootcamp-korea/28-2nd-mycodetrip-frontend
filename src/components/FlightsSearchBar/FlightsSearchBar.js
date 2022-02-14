@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import DatePick from './DatePick/DatePick';
 
 const FlightsSearchBar = () => {
-  const { getFilteredParams, navigateToWithQueryString } = useQueryString();
+  const { getFilteredParams, navigateWithQS } = useQueryString();
 
   const addSearchedData = () => {
     // 로컬스토리지에 저장
@@ -26,7 +26,7 @@ const FlightsSearchBar = () => {
   };
 
   const goToFlightsList = () => {
-    navigateToWithQueryString('/flightsList');
+    navigateWithQS('/flightsList');
   };
 
   const searchFlightsByInput = () => {

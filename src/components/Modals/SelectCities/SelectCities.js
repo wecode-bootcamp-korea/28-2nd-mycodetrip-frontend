@@ -11,7 +11,7 @@ const SelectCities = ({
   routeName,
   citiesData,
 }) => {
-  const { reflectUserSelectQueries } = useQueryString();
+  const { updateParams } = useQueryString();
   const hideModal = () => {
     setIsModalOpen({ ...isModalOpen, [routeName]: false });
   };
@@ -33,7 +33,7 @@ const SelectCities = ({
 
   const showCityName = e => {
     const { cityName, cityCode } = e.target.dataset;
-    reflectUserSelectQueries({
+    updateParams({
       [routeName]: cityName,
       [`${routeName}_code`]: cityCode,
     });

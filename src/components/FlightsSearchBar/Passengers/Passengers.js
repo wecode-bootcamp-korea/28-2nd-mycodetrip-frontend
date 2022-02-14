@@ -6,7 +6,7 @@ import { BsPerson } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
 
 const Passengers = () => {
-  const { searchParams, reflectUserSelectQueries } = useQueryString();
+  const { searchParams, updateParams } = useQueryString();
 
   // const [checkedSeat, setCheckedSeat] = useState('이코노미'); // 좌석
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈
@@ -20,7 +20,7 @@ const Passengers = () => {
   const calcPerson = e => {
     const { name } = e.target;
     adult = name === 'plus' ? adult + 1 : adult - 1;
-    reflectUserSelectQueries({
+    updateParams({
       adult,
     });
   };
@@ -29,7 +29,7 @@ const Passengers = () => {
 
   // const showSeat = e => {
   //   const { name } = e.target.dataset;
-  //   reflectUserSelectQueries({
+  //   updateParams({
   //     seat_type: name,
   //   });
   // };
