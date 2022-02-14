@@ -8,8 +8,7 @@ import useQueryString from '../../hooks/useQueryString';
 const PASSENGER_TYPE = ['adult', 'infant', 'baby'];
 
 const FlightsCheck = () => {
-  const { searchParams, reflectUserSelectQueries, navigateToWithQueryString } =
-    useQueryString();
+  const { searchParams, updateParams, navigateWithQS } = useQueryString();
 
   const {
     data: detailFlightsInfo,
@@ -48,16 +47,16 @@ const FlightsCheck = () => {
     // eslint-disable-next-line no-const-assign
     const isFlightReselected = departureFlightID === `${selectedFlightID}`;
     isFlightReselected
-      ? reflectUserSelectQueries({ departure_flight: '', return_flight: '' })
-      : reflectUserSelectQueries({ return_flight: '' });
+      ? updateParams({ departure_flight: '', return_flight: '' })
+      : updateParams({ return_flight: '' });
   };
 
   const goToReservation = () => {
-    navigateToWithQueryString('/reservation');
+    navigateWithQS('/reservation');
   };
 
   useEffect(() => {
-    if (!isFirstRender) navigateToWithQueryString('/flightsList');
+    if (!isFirstRender) navigateWithQS('/flightsList');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 

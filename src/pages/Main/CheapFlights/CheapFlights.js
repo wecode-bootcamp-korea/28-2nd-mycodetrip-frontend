@@ -14,7 +14,7 @@ import { GET_CHEAP_FLIGHTS_API } from './../../../config/config.js';
 const CheapFlights = () => {
   const [cheapFlightJeju, setCheapFlightJeju] = useState([]);
   const [cheapFlightParis, setCheapFlightParis] = useState([]);
-  const { navigateToWithQueryString, searchParams } = useQueryString();
+  const { navigateWithQS, searchParams } = useQueryString();
   const navigate = cardItem => {
     const usersUpdateQueries = {
       arrival_city: cardItem.arrival_city,
@@ -25,7 +25,7 @@ const CheapFlights = () => {
     Object.entries(usersUpdateQueries).map(([queryKey, queryValue]) =>
       searchParams.set(queryKey, queryValue)
     );
-    navigateToWithQueryString('/flightsList');
+    navigateWithQS('/flightsList');
   };
 
   useEffect(() => {
