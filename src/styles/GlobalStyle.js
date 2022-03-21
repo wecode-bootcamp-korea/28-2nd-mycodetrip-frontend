@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   
-  ul { 
+  ul, li { 
     list-style: none;
   }
   

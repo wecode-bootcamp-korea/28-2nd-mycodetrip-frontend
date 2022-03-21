@@ -1,5 +1,11 @@
 import { css } from 'styled-components';
+import * as Animation from './animation';
+
 export const theme = {
+  animation: {
+    fadeOut: Animation.FadeOut,
+    cellFadeOut: Animation.CellDisappear,
+  },
   flex: css`
     display: flex;
     align-items: center;
