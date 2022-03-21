@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CgArrowLongRight } from 'react-icons/cg';
+import { Flex, Typography } from '../_atom';
 import { getParsedTime, getFlightTime } from '../../utils/getTime';
 
 const FlightTimeInfo = ({ flightInfo }) => {
@@ -23,23 +24,14 @@ const FlightTimeInfo = ({ flightInfo }) => {
 
 export default FlightTimeInfo;
 
-const FlightInfo = styled.section`
+const FlightInfo = styled.div`
   display: grid;
   place-items: center;
 
+  // 화살표 --> 로 늘리기 위함
   svg {
     margin-inline: 0.5em;
     color: ${({ theme }) => theme.color.gray_500};
     transform: scale(1.5, 0.5);
   }
-`;
-
-const Typography = styled.span`
-  color: ${({ theme, color }) => (color ? theme.color[color] : 'inherit')};
-  font-size: 0.875rem;
-`;
-
-const Flex = styled.div`
-  ${({ theme }) => theme.flex};
-  gap: 0.5rem;
 `;

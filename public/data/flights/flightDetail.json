@@ -1,42 +1,44 @@
 {
-  "result": [
-    {
-      "id": 1,
-      "logo": "https://fakeimg.pl/100x100/",
-      "airline": "쁘띠민석",
-      "aircraft": "RS927",
-      "departure": {
-        "time": "2022-02-11T20:32Z",
-        "city": "광주",
-        "code": "GMP"
+  "result": {
+    "data": [
+      {
+        "id": 1,
+        "logo": "https://fakeimg.pl/100x100/",
+        "airline": "쁘띠민석",
+        "aircraft": "RS927",
+        "departure": {
+          "time": "2022-02-11T20:32Z",
+          "city": "광주",
+          "code": "GMP"
+        },
+        "arrival": {
+          "time": "2022-02-11T22:50Z",
+          "city": "제주",
+          "code": "CJU"
+        },
+        "tickets": 9,
+        "price": 36500,
+        "seat_type": "이코노미석"
       },
-      "arrival": {
-        "time": "2022-02-11T22:50Z",
-        "city": "제주",
-        "code": "CJU"
-      },
-      "tickets": 9,
-      "price": 36500,
-      "seat_type": "이코노미석"
-    },
-    {
-      "id": 2,
-      "logo": "https://fakeimg.pl/100x100/",
-      "airline": "희원항공",
-      "aircraft": "LJ331",
-      "departure": {
-        "time": "2022-03-22T03:20Z",
-        "city": "제주",
-        "code": "CJU"
-      },
-      "arrival": {
-        "time": "2022-03-22T01:08Z",
-        "city": "광주",
-        "code": "GMP"
-      },
-      "tickets": 1,
-      "price": 70900,
-      "baggage": 0
-    }
-  ]
+      {
+        "id": 2,
+        "logo": "https://fakeimg.pl/100x100/",
+        "airline": "희원항공",
+        "aircraft": "LJ331",
+        "departure": {
+          "time": "2022-03-22T03:20Z",
+          "city": "제주",
+          "code": "CJU"
+        },
+        "arrival": {
+          "time": "2022-03-22T01:08Z",
+          "city": "광주",
+          "code": "GMP"
+        },
+        "tickets": 1,
+        "price": 70900,
+        "baggage": 0
+      }
+    ]
+  }
 }

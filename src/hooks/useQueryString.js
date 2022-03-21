@@ -39,7 +39,6 @@ const useQueryString = () => {
     createNextParams();
     deleteKeyFromQS(optionKey);
     addFirstEntries();
-    applyNextQueryString();
 
     function addFirstEntries() {
       for (const option of allOptionList) {
@@ -50,15 +49,17 @@ const useQueryString = () => {
   }
 
   function toggleQSOption(optionKey, selectedOption) {
-    createNextParams();
-    const isSelectedOptionExist = searchParams
+    if (!nextSearchParams) createNextParams();
+    const isSelectedOptionExist = nextSearchParams
       .getAll(optionKey)
       .includes(selectedOption);
+
+    // key=id 쌍이 있다면 ? 제거 : 없다면 추가
     isSelectedOptionExist ? deleteToggleOption() : addToggleOption();
     applyNextQueryString();
 
     function deleteToggleOption() {
-      const existValues = searchParams.getAll(optionKey);
+      const existValues = nextSearchParams.getAll(optionKey);
       const nextQueryValues = existValues.filter(
         existValue => existValue !== selectedOption
       );
@@ -74,10 +75,11 @@ const useQueryString = () => {
   }
 
   function toggleQueryString(optionList, optionKey, selectedOption) {
-    const hasOptionKey = searchParams.has(optionKey);
-    hasOptionKey
-      ? initQSEntry(optionList, optionKey, selectedOption)
-      : toggleQSOption(optionKey, selectedOption);
+    const isFirstToggle = !searchParams.has(optionKey);
+    // 처음 누르는 경우 -> params에 모두 추가후 그 후에 toggle 해주어야 함
+
+    if (isFirstToggle) initQSEntry(optionList, optionKey, selectedOption);
+    toggleQSOption(optionKey, selectedOption);
   }
 
   function getFilteredParams(userRequestKeys) {
@@ -89,12 +91,21 @@ const useQueryString = () => {
     return filteredObj;
   }
 
+  function deleteOption(optionKeys) {
+    createNextParams();
+    for (const optionKey of optionKeys) {
+      deleteKeyFromQS(optionKey);
+    }
+    applyNextQueryString();
+  }
+
   return {
     searchParams,
     navigateWithQS,
     updateParams,
     toggleQueryString,
     getFilteredParams,
+    deleteOption,
   };
 };
 
