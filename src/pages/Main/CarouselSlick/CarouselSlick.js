@@ -2,6 +2,25 @@ import styled from 'styled-components';
 
 import Slider from 'react-slick';
 
+const bannerImgs = [
+  {
+    id: 1,
+    img: '/images/banners/banner_0.png',
+  },
+  {
+    id: 2,
+    img: '/images/banners/banner_1.png',
+  },
+  {
+    id: 3,
+    img: '/images/banners/banner_2.png',
+  },
+  {
+    id: 4,
+    img: '/images/banners/banner_3.png',
+  },
+];
+
 const CarouselSlick = () => {
   const sliderSettings = {
     dots: true,
@@ -13,21 +32,12 @@ const CarouselSlick = () => {
     autoplaySpeed: 2500,
   };
 
-  // const bannerImgs = [
-  //   {
-  //     id:1,
-  //     img:
-  //   },
-  // ];
-
   return (
     <Container>
       <StyledSlider {...sliderSettings}>
-        {/* {bannerImgs.map(banner => <img key={banner.id} src={banner.img} alt={} />)} */}
-        <img src="/images/banners/banner_0.png" alt="banner" />
-        <img src="/images/banners/banner_1.png" alt="banner" />
-        <img src="/images/banners/banner_2.png" alt="banner" />
-        <img src="/images/banners/banner_3.png" alt="banner" />
+        {bannerImgs.map(banner => (
+          <img key={banner.id} src={banner.img} alt={`banner${banner.id}`} />
+        ))}
       </StyledSlider>
     </Container>
   );
